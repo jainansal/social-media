@@ -13,7 +13,7 @@
           placeholder="Password"
           class="p-3 text-lg bg-slate-800 focus:outline-none"
         />
-        <div class="flex justify-between items-center">
+        <div class="flex justify-between items-center mt-5">
           <p class="cursor-pointer">Create account</p>
           <div class="p-2 bg-violet-800 cursor-pointer">Login</div>
         </div>
