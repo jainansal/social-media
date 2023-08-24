@@ -1,5 +1,5 @@
 <template>
-  <div class="soc-view soc-profile-view">
+  <div>
 
   </div>
 </template>

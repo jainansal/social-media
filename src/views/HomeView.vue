@@ -1,5 +1,5 @@
 <template>
-  <div class="soc-view soc-home-view">
+  <div>
 
   </div>
 </template>
