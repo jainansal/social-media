@@ -1,4 +1,5 @@
 <template>
+  <AppLoader :isLoading="isLoading" />
   <div class="h-screen w-screen">
     <AppNavbar />
     <div class="flex">
@@ -15,7 +16,9 @@
 
 <script setup>
 import { storeToRefs } from "pinia";
+import { ref } from "vue";
 
+import AppLoader from "@/components/common/AppLoader.vue";
 import AppNavbar from "../components/common/AppNavbar.vue";
 import FriendsActivity from "../components/home/FriendsActivity.vue";
 import { useUserStore } from "@/stores/user";
@@ -24,6 +27,7 @@ const store = useUserStore();
 
 const { firstName, lastName, fullName } = storeToRefs(store);
 const { changeNameTo } = store;
+const isLoading = ref(false);
 </script>
 
 <style lang="scss" scoped>
