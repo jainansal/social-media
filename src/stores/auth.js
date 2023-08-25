@@ -11,6 +11,7 @@ export const useAuthStore = defineStore('auth', () => {
   const initAuth = () => {
     if (localStorage.getItem('userId')) {
       try {
+        console.log(loggedIn.value)
         loggedIn.value = true
         userId.value = localStorage.getItem('userId')
         toast.success("Welcome back")
