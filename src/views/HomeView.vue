@@ -17,6 +17,7 @@
 <script setup>
 import { storeToRefs } from "pinia";
 import { ref } from "vue";
+import { useToast } from "vue-toastification";
 
 import AppLoader from "@/components/common/AppLoader.vue";
 import AppNavbar from "../components/common/AppNavbar.vue";
@@ -24,10 +25,13 @@ import FriendsActivity from "../components/home/FriendsActivity.vue";
 import { useUserStore } from "@/stores/user";
 
 const store = useUserStore();
+const toast = useToast();
 
 const { firstName, lastName, fullName } = storeToRefs(store);
 const { changeNameTo } = store;
 const isLoading = ref(false);
+
+toast.success(`Hi, ${fullName.value}`);
 </script>
 
 <style lang="scss" scoped>
