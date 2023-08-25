@@ -1,6 +1,6 @@
 <template>
   <div class="bg-slate-700 p-5 flex justify-between items-center">
-    <h1 class="text-3xl font-bold">SOCIALS</h1>
+    <h1 class="text-3xl font-bold cursor-pointer" @click="linkTo('home')">SOCIALS</h1>
     <div class="flex gap-7">
       <div class="text-xl cursor-pointer" @click="() => linkTo('profile')">
         Hello, {{ firstName }}
