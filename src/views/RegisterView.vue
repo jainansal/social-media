@@ -48,6 +48,7 @@ import { useToast } from "vue-toastification";
 
 // Local file imports
 import AppLoader from "@/components/common/AppLoader.vue";
+import authServices from "@/services/auth";
 
 // Config
 const router = useRouter();
@@ -68,8 +69,10 @@ const formData = reactive({
 const handleSubmit = async () => {
   try {
     isLoading.value = true;
-    await fetch("http://localhost:7000/api");
+    await authServices.register(formData);
+    router.push({ name: "home" });
   } catch (error) {
+    console.log(error);
     toast.error("Some error occured");
   } finally {
     isLoading.value = false;

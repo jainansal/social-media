@@ -23,5 +23,23 @@ export const useAuthStore = defineStore('auth', () => {
     }
   }
 
-  return { loggedIn, userId, initAuth };
+  const setLoggedIn = (value) => {
+    loggedIn.value = value
+  }
+  const setUserId = (value) => {
+    userId.value = value
+  }
+  const reset = () => {
+    loggedIn.value=false
+    userId.value=null
+  }
+
+  return {
+    loggedIn,
+    userId,
+    initAuth,
+    setLoggedIn,
+    setUserId,
+    reset
+  };
 })
