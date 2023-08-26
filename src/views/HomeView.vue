@@ -3,7 +3,7 @@
   <div class="h-screen w-screen">
     <AppNavbar />
     <div class="flex">
-      <FriendsActivity />
+      <FriendsActivityIndex />
       <div class="basis-1/2 p-4 bg-slate-600 my-6 mx-3">
         <LabelSection label="All Posts" />
       </div>
@@ -21,7 +21,7 @@ import { useToast } from "vue-toastification";
 
 import AppLoader from "@/components/common/AppLoader.vue";
 import AppNavbar from "../components/common/AppNavbar.vue";
-import FriendsActivity from "../components/home/FriendsActivity.vue";
+import FriendsActivityIndex from "@/components/friends_activity/Index.vue";
 import LabelSection from "@/components/common/LabelSection.vue";
 import { useUserStore } from "@/stores/user";
 
