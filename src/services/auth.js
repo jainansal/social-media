@@ -1,8 +1,20 @@
+import axios from "axios"
+
 import { useAuthStore } from "../stores/auth"
 import { useUserStore } from "../stores/user"
 
 const auth = useAuthStore()
 const user = useUserStore()
+
+const login = async (data) => {
+  console.log(data.email)
+  const response = await axios.post('auth/login', {
+    email: data.email,
+    password: data.password
+  })
+  console.log(response)
+  return response
+}
 
 const register = async (data) => {
   console.log(data)
@@ -22,6 +34,7 @@ const logout = async () => {
 }
 
 export default {
+  login,
   register,
   logout
 }

@@ -37,6 +37,7 @@ import { useToast } from "vue-toastification";
 
 // Local file imports
 import AppLoader from "@/components/common/AppLoader.vue";
+import authServices from "@/services/auth";
 
 // Config
 const router = useRouter();
@@ -55,17 +56,17 @@ const formData = reactive({
 const handleSubmit = async () => {
   try {
     isLoading.value = true;
-    await fetch("http://localhost:7000/api");
+    const response = await authServices.login(formData);
   } catch (error) {
-    toast.error('Some error occured')
+    toast.error("Some error occured");
   } finally {
     isLoading.value = false;
   }
 };
 
 const linkTo = (path) => {
-  router.push({name: path});
-}
+  router.push({ name: path });
+};
 </script>
 
 <style lang="scss" scoped>
