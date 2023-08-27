@@ -2,7 +2,7 @@ import { defineStore } from "pinia";
 import { computed, ref } from "vue";
 
 export const useUserStore = defineStore('user', () => {
-  const firstName = ref('admin')
+  const firstName = ref('')
   const lastName = ref('')
   const email = ref('')
   const fullName = computed(() => firstName.value + ' ' + lastName.value)
@@ -17,9 +17,9 @@ export const useUserStore = defineStore('user', () => {
     email.value = value
   }
   const reset = () => {
-    firstName.value=''
-    lastName.value=''
-    email.value=''
+    firstName.value = ''
+    lastName.value = ''
+    email.value = ''
   }
 
   return {
@@ -28,7 +28,7 @@ export const useUserStore = defineStore('user', () => {
     email,
     fullName,
     setFirstName,
-    setLastName, 
+    setLastName,
     setEmail,
     reset
   }
