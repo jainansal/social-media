@@ -8,10 +8,10 @@
         class="w-full rounded-lg"
       />
       <div class="font-bold text-4xl">
-        Ansal Jain
+        {{fullName}}
       </div>
       <div class="cursor-pointer">
-        jainansal@gmail.com
+        {{email}}
       </div>
       <div class="bg-red-500 p-2 font-semibold rounded-lg cursor-pointer">
         Edit profile
@@ -21,7 +21,14 @@
 </template>
 
 <script setup>
+import { storeToRefs } from "pinia";
+
 import LabelSection from "@/components/common/LabelSection.vue";
+import {useUserStore} from "@/stores/user"
+
+const user = useUserStore()
+
+const {fullName, email} = storeToRefs(user)
 </script>
 
 <style lang="scss" scoped>
