@@ -1,4 +1,5 @@
 <template>
+  <AppLoader :isLoading="isLoading" />
   <div class="w-screen h-screen flex items-center justify-center">
     <div class="bg-slate-700 flex flex-col items-center p-16 gap-12">
       <h1 class="font-semibold text-4xl">SOCIALS</h1>

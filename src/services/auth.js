@@ -19,7 +19,13 @@ const init = async () => {
 }
 
 const register = async (data) => {
-  console.log(data)
+  const response = await axios.post('auth/register', {
+    email: data.email,
+    firstName: data.firstName,
+    lastName: data.lastName,
+    password: data.password
+  })
+  return response
 }
 
 const logout = async () => {
