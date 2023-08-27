@@ -2,6 +2,8 @@ import { createWebHistory, createRouter } from "vue-router";
 import { useToast } from "vue-toastification";
 
 import { useAuthStore } from "../stores/auth";
+import { useUserStore } from "../stores/user";
+import authServices from "@/services/auth"
 
 const toast = useToast()
 
@@ -37,14 +39,34 @@ const router = createRouter({
   routes,
 });
 
-router.beforeEach(async (to) => {
+router.beforeEach(async (to, from, next) => {
   const publicPages = ['/login', '/register']
   const authRequired = !publicPages.includes(to.path)
   const auth = useAuthStore()
+  const user = useUserStore()
 
-  if (authRequired && !auth.loggedIn) {
-    toast.warning('You need to login first')
-    return '/login'
+  if (!auth.loggedIn) {
+    try {
+      const data = await authServices.init()
+      auth.setLoggedIn(true)
+      auth.setUserId(data.data._id)
+      user.setFirstName(data.data.firstName)
+      user.setLastName(data.data.lastName)
+      user.setEmail(data.data.email)
+    } catch (err) {
+      console.log(err)
+      if (authRequired) {
+        next('/login')
+      } else {
+        next();
+      }
+    }
+  }
+
+  if (to.name === 'login' || to.name === 'register' && auth.loggedIn) {
+    next('/')
+  } else {
+    next()
   }
 })
 

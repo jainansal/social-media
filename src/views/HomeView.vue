@@ -29,7 +29,7 @@ const user = useUserStore();
 const toast = useToast();
 
 const { firstName, lastName, fullName } = storeToRefs(user);
-const { changeNameTo } = store;
+const { changeNameTo } = user;
 const isLoading = ref(false);
 
 // toast.success(`Hi, ${fullName.value}`);
