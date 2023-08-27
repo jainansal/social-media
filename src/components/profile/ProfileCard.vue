@@ -1,5 +1,5 @@
 <template>
-  <div class="flex basis-1/4 bg-slate-600 m-6 mr-3 p-4 flex-col rounded-2xl">
+  <div class="flex basis-1/4 m-6 mr-3 p-4 flex-col rounded-2xl">
     <LabelSection label="Profile" />
     <div class="mt-4 flex justify-center items-center flex-col gap-4">
       <img
