@@ -1,5 +1,5 @@
 <template>
-  <div class="text-xl font-semibold pb-3 border-b-2 w-full">
+  <div class="text-xl font-semibold pb-2 border-b-2 w-full">
     {{label}}
   </div>
 </template>
