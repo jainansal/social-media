@@ -5,6 +5,7 @@ import { useToast } from "vue-toastification";
 const toast = useToast()
 
 export const useAuthStore = defineStore('auth', () => {
+  const init = ref(false);
   const loggedIn = ref(false)
   const userId = ref(null)
 
@@ -23,6 +24,9 @@ export const useAuthStore = defineStore('auth', () => {
     }
   }
 
+  const setInit = (value) => {
+    init.value = value
+  }
   const setLoggedIn = (value) => {
     loggedIn.value = value
   }
@@ -35,9 +39,11 @@ export const useAuthStore = defineStore('auth', () => {
   }
 
   return {
+    init,
     loggedIn,
     userId,
     initAuth,
+    setInit,
     setLoggedIn,
     setUserId,
     reset

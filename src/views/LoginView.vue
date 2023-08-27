@@ -38,14 +38,33 @@ import { useToast } from "vue-toastification";
 // Local file imports
 import AppLoader from "@/components/common/AppLoader.vue";
 import authServices from "@/services/auth";
+import { useAuthStore } from "@/stores/auth";
 
 // Config
+const auth = useAuthStore();
 const router = useRouter();
 const toast = useToast();
 
 // Base variables
 const isLoading = ref(false);
 const errorMsg = ref("");
+
+console.log(auth)
+
+if (!auth.init) {
+  auth.setInit(true);
+  console.log(auth)
+  try {
+    isLoading.value = true;
+    const response = await authServices.init();
+    console.log(response);
+  } catch (err) {
+    console.log("Err", err);
+    router.push({name: 'login'})
+  } finally {
+    isLoading.value = false;
+  }
+}
 
 // Specific variables
 const formData = reactive({
@@ -56,7 +75,8 @@ const formData = reactive({
 const handleSubmit = async () => {
   try {
     isLoading.value = true;
-    const response = await authServices.login(formData);
+    await authServices.login(formData);
+    router.push({ name: "home" });
   } catch (error) {
     toast.error("Some error occured");
   } finally {

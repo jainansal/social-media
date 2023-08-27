@@ -25,10 +25,10 @@ import FriendsActivityIndex from "@/components/friends_activity/Index.vue";
 import LabelSection from "@/components/common/LabelSection.vue";
 import { useUserStore } from "@/stores/user";
 
-const store = useUserStore();
+const user = useUserStore();
 const toast = useToast();
 
-const { firstName, lastName, fullName } = storeToRefs(store);
+const { firstName, lastName, fullName } = storeToRefs(user);
 const { changeNameTo } = store;
 const isLoading = ref(false);
 
