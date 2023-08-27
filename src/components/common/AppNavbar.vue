@@ -17,16 +17,23 @@ import { useRouter } from "vue-router";
 import { storeToRefs } from "pinia";
 
 import { useUserStore } from "@/stores/user";
+import { useAuthStore } from "@/stores/auth";
 import authServices from "@/services/auth";
 
 const router = useRouter();
 const user = useUserStore();
+const auth = useAuthStore();
 
 const { firstName, lastName } = storeToRefs(user);
 
 const logout = async () => {
-  await authServices.logout();
-  router.push({ name: "login" });
+  try {
+    await authServices.logout();
+    auth.setLoggedIn(false);
+    router.push({ name: "login" });
+  } catch (err) {
+    console.log(`Error: ${err}`);
+  }
 };
 
 const linkTo = (path) => {

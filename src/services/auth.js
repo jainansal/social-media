@@ -23,7 +23,7 @@ const register = async (data) => {
 }
 
 const logout = async () => {
-  localStorage.removeItem('userId');
+  await axios.post('auth/logout')
 }
 
 export default {
