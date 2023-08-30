@@ -18,16 +18,16 @@
     </div>
     <div class="flex items-center gap-2">
       <i
-        class="fa-regular fa-heart cursor-pointer text-xl text-rose-500"
+        class="fa-regular fa-heart fa-xl cursor-pointer text-rose-500"
         v-if="!isLiked"
         @click="toggleLiked"
       ></i>
       <i
         @click="toggleLiked"
-        class="fa-solid fa-heart text-rose-500 cursor-pointer text-xl"
+        class="fa-solid fa-heart fa-xl text-rose-500 cursor-pointer"
         v-else
       ></i>
-      <p class="mb-[1px]">5</p>
+      <p class="mb-[2px]">5</p>
     </div>
   </div>
 </template>
