@@ -1,8 +1,7 @@
 <template>
   <EditProfile v-if="showModal" @closeModal="toggleModal" />
-  <div class="flex basis-1/4 m-6 mr-3 p-4 flex-col rounded-2xl">
-    <LabelSection label="Profile" />
-    <div class="mt-4 flex justify-center items-center flex-col gap-4">
+  <div class="flex basis-1/4 m-6 mr-3 flex-col rounded-2xl">
+    <div class="flex justify-center items-center flex-col gap-4">
       <img
         src="https://www.mintface.xyz/content/images/2021/08/QmTndiF423kjdXsNzsip1QQkBQqDuzDhJnGuJAXtv4XXiZ-1.png"
         alt="profile-img"
