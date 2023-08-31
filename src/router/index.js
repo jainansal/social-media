@@ -53,6 +53,9 @@ router.beforeEach(async (to, from, next) => {
       user.setFirstName(data.data.firstName)
       user.setLastName(data.data.lastName)
       user.setEmail(data.data.email)
+      console.log(data.data.profileImg)
+      user.setProfileImg(data.data.profileImg)
+      console.log(user)
     } catch (err) {
       console.log(err)
       if (authRequired) {

@@ -2,6 +2,7 @@ import { defineStore } from "pinia";
 import { computed, ref } from "vue";
 
 export const useUserStore = defineStore('user', () => {
+  const profileImg = ref('https://www.mintface.xyz/content/images/2021/08/QmTndiF423kjdXsNzsip1QQkBQqDuzDhJnGuJAXtv4XXiZ-1.png');
   const firstName = ref('')
   const lastName = ref('')
   const email = ref('')
@@ -16,6 +17,9 @@ export const useUserStore = defineStore('user', () => {
   const setEmail = (value) => {
     email.value = value
   }
+  const setProfileImg = (value) => {
+    profileImg.value = value
+  }
   const reset = () => {
     firstName.value = ''
     lastName.value = ''
@@ -23,6 +27,7 @@ export const useUserStore = defineStore('user', () => {
   }
 
   return {
+    profileImg,
     firstName,
     lastName,
     email,
@@ -30,6 +35,7 @@ export const useUserStore = defineStore('user', () => {
     setFirstName,
     setLastName,
     setEmail,
+    setProfileImg,
     reset
   }
 })
