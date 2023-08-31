@@ -18,6 +18,11 @@ const routes = [
     redirect: '/'
   },
   {
+    path: '/profile/:id',
+    name: 'user-profile',
+    component: () => import('@/views/ProfileView.vue')
+  },
+  {
     path: '/profile',
     name: 'profile',
     component: () => import('@/views/ProfileView.vue')
