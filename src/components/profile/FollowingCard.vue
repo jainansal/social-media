@@ -1,14 +1,17 @@
 <template>
   <div class="basis-1/4 p-4 m-6 ml-3">
-    <LabelSection label="My Friends" />
+    <LabelSection label="Following" />
     <div class="mt-4 flex flex-col gap-4">
       <div
-        v-for="(friend,index) in myFriends"
+        v-for="(friend, index) in myFriends"
         :key="index"
         class="flex items-center gap-2 cursor-pointer"
       >
-        <img :src="friend.profileImg" class="w-14 h-14 object-cover rounded-full">
-        <div class="text-base font-semibold">{{friend.fullName}}</div>
+        <img
+          :src="friend.profileImg"
+          class="w-14 h-14 object-cover rounded-full"
+        />
+        <div class="text-base font-semibold">{{ friend.fullName }}</div>
       </div>
     </div>
   </div>
@@ -19,8 +22,7 @@ import LabelSection from "@/components/common/LabelSection.vue";
 
 const myFriends = [
   {
-    profileImg:
-      "https://hypixel.net/attachments/2475043/",
+    profileImg: "https://hypixel.net/attachments/2475043/",
     fullName: "Karan Singh",
   },
   {

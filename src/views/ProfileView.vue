@@ -7,7 +7,7 @@
         <NewPost />
         <PostCard v-for="(post, index) in posts" :key="index" :postId="post" />
       </div>
-      <FriendsCard />
+      <FollowingCard />
     </div>
   </div>
 </template>
@@ -18,7 +18,7 @@ import { storeToRefs } from "pinia";
 import AppNavbar from "../components/common/AppNavbar.vue";
 import ProfileCard from "../components/profile/ProfileCard.vue";
 import LabelSection from "@/components/common/LabelSection.vue";
-import FriendsCard from "@/components/profile/FriendsCard.vue";
+import FollowingCard from "@/components/profile/FollowingCard.vue";
 import NewPost from "../components/common/NewPost.vue";
 import PostCard from "../components/common/PostCard.vue";
 import { useUserStore } from "@/stores/user";
