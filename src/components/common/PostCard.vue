@@ -7,15 +7,10 @@
       />
       <div>
         <h4 class="text-xl font-semibold">Ansal Jain</h4>
-        <p class="text-xs">Posted yesterday</p>
+        <p class="text-xs">{{ updatedAt }}</p>
       </div>
     </div>
-    <div class="text-lg">
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Esse, rem
-      perspiciatis. Minus id sed ab enim nostrum et consectetur, soluta beatae
-      natus, vel voluptatibus dicta voluptas? Animi suscipit assumenda nulla
-      ratione doloribus temporibus doloremque?
-    </div>
+    <div class="text-lg">{{ content }}</div>
     <div class="flex items-center gap-2">
       <i
         class="fa-regular fa-heart fa-xl cursor-pointer text-rose-500"
@@ -27,7 +22,7 @@
         class="fa-solid fa-heart fa-xl text-rose-500 cursor-pointer"
         v-else
       ></i>
-      <p class="mb-[2px]">5</p>
+      <p class="mb-[2px]">{{ likeCount }}</p>
     </div>
   </div>
 </template>
@@ -35,7 +30,34 @@
 <script setup>
 import { ref } from "vue";
 
-const isLiked = ref(true);
+import postServices from "@/services/post";
+
+const props = defineProps({
+  postId: {
+    type: String,
+  },
+});
+const content = ref("");
+const likes = ref([]);
+const likeCount = ref(0);
+const updatedAt = ref(null);
+
+const getPost = async () => {
+  try {
+    const data = await postServices.getPost(props.postId);
+    console.log(data);
+    content.value = data.content;
+    likes.value = data.likes;
+    likeCount.value = data.likeCount;
+    updatedAt.value = data.updatedAt;
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+getPost();
+
+const isLiked = ref(false);
 
 const toggleLiked = () => {
   isLiked.value = !isLiked.value;

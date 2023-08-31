@@ -11,6 +11,13 @@ const editProfile = async (data) => {
   })
 }
 
+const addPost = async (data) => {
+  const response = await axios.post(`post`, {
+    content: data
+  })
+}
+
 export default {
-  editProfile
+  editProfile,
+  addPost
 }
