@@ -1,10 +1,11 @@
 <template>
+  <AppLoader :isLoading="isLoading" />
   <div
     class="absolute h-screen w-screen top-0 left-0 flex justify-center items-center bg-black/70"
   >
     <form
       class="bg-white text-black p-4 flex flex-col items-center gap-2 rounded-md relative"
-      @submit.prevent="handleSubmit"
+      @submit.prevent="editProfile"
     >
       <i
         class="fa-solid fa-circle-xmark fa-xl absolute right-1 top-4 cursor-pointer"
@@ -12,7 +13,7 @@
       ></i>
       <div class="flex flex-col gap-2 w-max">
         <img
-          :src="pfpLink"
+          :src="formData.profileImg"
           alt="Enter a valid URL"
           class="h-56 rounded-sm object-cover"
         />
@@ -20,7 +21,7 @@
           type="text"
           placeholder="Profile Picture (image address)"
           class="p-2 rounded-md w-full border-2 border-black/40"
-          v-model="pfpLink"
+          v-model="formData.profileImg"
           required
         />
       </div>
@@ -61,24 +62,39 @@
 </template>
 
 <script setup>
-import { ref, defineEmits } from "vue";
+import { ref, defineEmits, reactive } from "vue";
 import { storeToRefs } from "pinia";
+import { useRouter } from "vue-router";
 
+import AppLoader from "@/components/common/AppLoader.vue";
 import { useUserStore } from "@/stores/user";
+import userServices from "@/services/user";
 
 const emit = defineEmits(["closeModal"]);
 const user = useUserStore();
+const isLoading = ref(false);
+const router = useRouter();
 
-const formData = {
+const formData = reactive({
   firstName: user.firstName,
   lastName: user.lastName,
-};
-const pfpLink = ref(
-  "https://www.mintface.xyz/content/images/2021/08/QmTndiF423kjdXsNzsip1QQkBQqDuzDhJnGuJAXtv4XXiZ-1.png"
-);
+  profileImg: user.profileImg,
+});
 
 const handleClose = () => {
   emit("closeModal");
+};
+
+const editProfile = async () => {
+  try {
+    isLoading.value = true;
+    await userServices.editProfile(formData);
+    router.go();
+  } catch (err) {
+    console.log(`Error ${err}`);
+  } finally {
+    isLoading.value = false;
+  }
 };
 </script>
 
