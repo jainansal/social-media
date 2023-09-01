@@ -10,7 +10,12 @@ const getAllPosts = async () => {
   return response.data
 }
 
+const toggleLike = async (id) => {
+  await axios.put(`post/likecomment/${id}`);
+}
+
 export default {
+  toggleLike,
   getPost,
   getAllPosts
 }

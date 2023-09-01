@@ -35,8 +35,10 @@ import { computed, reactive, ref } from "vue";
 import { useRouter } from "vue-router";
 
 import postServices from "@/services/post";
-import util from "@/util"
+import util from "@/util";
+import { useAuthStore } from "@/stores/auth";
 
+const authStore = useAuthStore();
 const router = useRouter();
 const props = defineProps({
   details: {
@@ -51,7 +53,7 @@ const isLiked = ref(false);
 const content = ref("");
 const likes = ref([]);
 const likeCount = ref(0);
-const updatedAt = ref(null);
+const createdAt = ref(null);
 const user = reactive({
   id: "",
   fullName: "",
@@ -65,10 +67,14 @@ const getPost = async () => {
     content.value = data.content;
     likes.value = data.likes;
     likeCount.value = data.likeCount;
-    updatedAt.value = data.updatedAt;
+    createdAt.value = data.createdAt;
     user.id = data.author._id;
     user.fullName = data.author.firstName + " " + data.author.lastName;
     user.pfp = data.author.profileImg;
+    console.log(data.likes);
+    if (data.likes.includes(authStore.userId)) {
+      isLiked.value = true;
+    }
   } catch (err) {
     console.log(err);
   }
@@ -80,14 +86,27 @@ if (!props.details) {
   content.value = data.content;
   likes.value = data.likes;
   likeCount.value = data.likeCount;
-  updatedAt.value = data.updatedAt;
+  createdAt.value = data.createdAt;
   user.id = data.author._id;
   user.fullName = data.author.firstName + " " + data.author.lastName;
   user.pfp = data.author.profileImg;
 }
 
-const toggleLiked = () => {
-  isLiked.value = !isLiked.value;
+const toggleLiked = async () => {
+  try {
+    let postId = props.postId;
+    if (!props.postId) postId = props.details._id;
+    await postServices.toggleLike(postId);
+    if (isLiked.value) {
+      isLiked.value = false;
+      likeCount.value--;
+    } else {
+      isLiked.value = true;
+      likeCount.value++;
+    }
+  } catch (err) {
+    console.log(err);
+  }
 };
 
 const visitProfile = () => {
@@ -95,8 +114,8 @@ const visitProfile = () => {
 };
 
 const timeFromNow = computed(() => {
-  return util.timeFromNow(updatedAt.value)
-})
+  return util.timeFromNow(createdAt.value);
+});
 </script>
 
 <style lang="scss" scoped>
