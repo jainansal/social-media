@@ -5,7 +5,7 @@
     <div class="h-full flex overflow-hidden">
       <ProfileCard :details="profile" />
       <PostSection :posts="posts" />
-      <FollowingCard />
+      <FollowingCard :users="following" />
     </div>
   </div>
 </template>
@@ -39,6 +39,7 @@ const profile = reactive({
   profileImg: "",
 });
 const posts = ref([]);
+const following = ref([]);
 
 const getUserData = async () => {
   try {
@@ -48,6 +49,8 @@ const getUserData = async () => {
     profile.email = response.email;
     profile.profileImg = response.profileImg;
     posts.value = response.posts;
+    following.value = response.following;
+    console.log(following.value);
   } catch (err) {
     console.log("Error fetching user data", err);
   } finally {

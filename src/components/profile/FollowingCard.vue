@@ -3,38 +3,40 @@
     <LabelSection label="Following" />
     <div class="mt-4 flex flex-col gap-4">
       <div
-        v-for="(friend, index) in myFriends"
+        v-for="(user, index) in users"
         :key="index"
         class="flex items-center gap-2 cursor-pointer"
+        @click="visit(user._id)"
       >
         <img
-          :src="friend.profileImg"
+          :src="user.profileImg"
           class="w-14 h-14 object-cover rounded-full"
         />
-        <div class="text-base font-semibold">{{ friend.fullName }}</div>
+        <div class="text-base font-semibold">
+          {{ user.firstName }} {{ user.lastName }}
+        </div>
       </div>
+      <div v-if="!users.length">You aren't following any user</div>
     </div>
   </div>
 </template>
 
 <script setup>
+import { useRoute, useRouter } from "vue-router";
+
 import LabelSection from "@/components/common/LabelSection.vue";
 
-const myFriends = [
-  {
-    profileImg: "https://hypixel.net/attachments/2475043/",
-    fullName: "Karan Singh",
+const router = useRouter();
+const props = defineProps({
+  users: {
+    type: Array,
+    default: [],
   },
-  {
-    profileImg: "https://wallpapercave.com/uwp/uwp3653906.webp",
-    fullName: "Aryan Verma",
-  },
-  {
-    profileImg:
-      "https://dthezntil550i.cloudfront.net/rr/latest/rr2208150850422700022623251/1280_960/7a0a6f5d-a292-4e70-9551-9728c61d30f2.jpg",
-    fullName: "Lily Smith",
-  },
-];
+});
+
+const visit = (id) => {
+  router.push({ path: `/profile/${id}` });
+};
 </script>
 
 <style lang="scss" scoped>

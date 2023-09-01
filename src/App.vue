@@ -1,5 +1,6 @@
 <template>
-  <RouterView />
+  <!-- Full path added to force reload the page on changing parameters -->
+  <RouterView :key="$route.fullPath" />
 </template>
 
 <script setup>
