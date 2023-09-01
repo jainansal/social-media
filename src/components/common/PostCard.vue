@@ -71,7 +71,6 @@ const getPost = async () => {
     user.id = data.author._id;
     user.fullName = data.author.firstName + " " + data.author.lastName;
     user.pfp = data.author.profileImg;
-    console.log(data.likes);
     if (data.likes.includes(authStore.userId)) {
       isLiked.value = true;
     }
@@ -90,6 +89,9 @@ if (!props.details) {
   user.id = data.author._id;
   user.fullName = data.author.firstName + " " + data.author.lastName;
   user.pfp = data.author.profileImg;
+  if (data.likes.includes(authStore.userId)) {
+    isLiked.value = true;
+  }
 }
 
 const toggleLiked = async () => {
