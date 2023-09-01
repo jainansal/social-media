@@ -5,6 +5,12 @@ const getPost = async (id) => {
   return response.data
 }
 
+const getAllPosts = async () => {
+  const response = await axios.get('post');
+  return response.data
+}
+
 export default {
-  getPost
+  getPost,
+  getAllPosts
 }

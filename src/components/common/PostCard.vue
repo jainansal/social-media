@@ -1,9 +1,15 @@
 <template>
   <div class="border-2 rounded-2xl border-slate-400 p-2 gap-6 flex flex-col">
     <div class="flex gap-2 items-center">
-      <img :src="user.pfp" class="h-12 w-12 object-cover rounded-full" />
+      <img
+        :src="user.pfp"
+        class="h-12 w-12 object-cover rounded-full cursor-pointer"
+        @click="visitProfile"
+      />
       <div>
-        <h4 class="text-xl font-semibold">{{ user.fullName }}</h4>
+        <h4 class="text-xl font-semibold cursor-pointer" @click="visitProfile">
+          {{ user.fullName }}
+        </h4>
         <p class="text-xs">{{ updatedAt }}</p>
       </div>
     </div>
@@ -26,10 +32,15 @@
 
 <script setup>
 import { reactive, ref } from "vue";
+import { useRouter } from "vue-router";
 
 import postServices from "@/services/post";
 
+const router = useRouter();
 const props = defineProps({
+  details: {
+    type: Object,
+  },
   postId: {
     type: String,
   },
@@ -41,6 +52,7 @@ const likes = ref([]);
 const likeCount = ref(0);
 const updatedAt = ref(null);
 const user = reactive({
+  id: "",
   fullName: "",
   pfp: "",
 });
@@ -53,16 +65,32 @@ const getPost = async () => {
     likes.value = data.likes;
     likeCount.value = data.likeCount;
     updatedAt.value = data.updatedAt;
+    user.id = data.author._id;
     user.fullName = data.author.firstName + " " + data.author.lastName;
     user.pfp = data.author.profileImg;
   } catch (err) {
     console.log(err);
   }
 };
-getPost();
+if (!props.details) {
+  getPost();
+} else {
+  const data = props.details;
+  content.value = data.content;
+  likes.value = data.likes;
+  likeCount.value = data.likeCount;
+  updatedAt.value = data.updatedAt;
+  user.id = data.author._id;
+  user.fullName = data.author.firstName + " " + data.author.lastName;
+  user.pfp = data.author.profileImg;
+}
 
 const toggleLiked = () => {
   isLiked.value = !isLiked.value;
+};
+
+const visitProfile = () => {
+  router.push({ path: `/profile/${user.id}` });
 };
 </script>
 
