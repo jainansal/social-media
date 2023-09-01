@@ -1,13 +1,10 @@
 <template>
   <AppLoader :isLoading="isLoading" />
-  <div class="h-full w-full flex flex-col">
+  <div class="h-screen w-screen flex flex-col">
     <AppNavbar />
-    <div class="flex items-start">
+    <div class="h-full flex overflow-hidden">
       <ProfileCard :details="profile" />
-      <div class="basis-1/2 my-6 mx-3 flex flex-col gap-4">
-        <NewPost />
-        <PostCard v-for="(post, index) in posts" :key="index" :postId="post" />
-      </div>
+      <PostSection :posts="posts" />
       <FollowingCard />
     </div>
   </div>
@@ -25,6 +22,7 @@ import LabelSection from "@/components/common/LabelSection.vue";
 import FollowingCard from "@/components/profile/FollowingCard.vue";
 import NewPost from "../components/common/NewPost.vue";
 import PostCard from "../components/common/PostCard.vue";
+import PostSection from "@/components/common/PostSection.vue";
 import userServices from "@/services/user";
 import { useAuthStore } from "@/stores/auth";
 

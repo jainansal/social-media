@@ -4,10 +4,7 @@
     <AppNavbar />
     <div class="h-full flex overflow-hidden">
       <FriendsActivityIndex />
-      <div class="basis-1/2 my-6 mx-3 flex flex-col gap-4 overlay">
-        <NewPost />
-        <PostCard v-for="(post, index) in posts" :key="index" :details="post" />
-      </div>
+      <PostSection :posts="posts" :withDetails="true" />
       <div class="basis-1/4 p-4 bg-slate-600 m-6 ml-3">
         <LabelSection label="Trending" />
       </div>
@@ -25,6 +22,7 @@ import AppLoader from "@/components/common/AppLoader.vue";
 import AppNavbar from "../components/common/AppNavbar.vue";
 import FriendsActivityIndex from "@/components/friends_activity/Index.vue";
 import LabelSection from "@/components/common/LabelSection.vue";
+import PostSection from "@/components/common/PostSection.vue";
 import postServices from "@/services/post";
 
 const toast = useToast();
@@ -48,7 +46,4 @@ getPosts();
 </script>
 
 <style lang="scss" scoped>
-.overlay {
-  overflow: overlay;
-}
 </style>
