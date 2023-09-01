@@ -10,7 +10,7 @@
         <h4 class="text-xl font-semibold cursor-pointer" @click="visitProfile">
           {{ user.fullName }}
         </h4>
-        <p class="text-xs">{{ updatedAt }}</p>
+        <p class="text-xs">{{ timeFromNow }}</p>
       </div>
     </div>
     <div class="text-lg">{{ content }}</div>
@@ -31,10 +31,11 @@
 </template>
 
 <script setup>
-import { reactive, ref } from "vue";
+import { computed, reactive, ref } from "vue";
 import { useRouter } from "vue-router";
 
 import postServices from "@/services/post";
+import util from "@/util"
 
 const router = useRouter();
 const props = defineProps({
@@ -92,6 +93,10 @@ const toggleLiked = () => {
 const visitProfile = () => {
   router.push({ path: `/profile/${user.id}` });
 };
+
+const timeFromNow = computed(() => {
+  return util.timeFromNow(updatedAt.value)
+})
 </script>
 
 <style lang="scss" scoped>
