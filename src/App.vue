@@ -10,4 +10,20 @@
 .overlay {
   overflow: overlay;
 }
+
+::-webkit-scrollbar-track
+{
+	background-color: inherit;
+}
+
+::-webkit-scrollbar
+{
+	width: 6px;
+	background-color: inherit;
+}
+
+::-webkit-scrollbar-thumb
+{
+	background-color: rgb(255, 255, 255, 0.3);
+}
 </style>
