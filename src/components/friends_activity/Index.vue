@@ -1,6 +1,6 @@
 <template>
-  <div class="flex basis-1/4 p-4 bg-slate-600 m-6 mr-3 flex-col">
-    <LabelSection label="Activity" />
+  <div class="flex basis-1/4 p-4 m-6 mr-3 flex-col">
+    <LabelSection label="What's happening?" />
     <div class="mt-3">
       <FriendsActivityDetail
         v-for="(item, index) in activity"
