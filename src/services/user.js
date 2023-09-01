@@ -3,6 +3,11 @@ import { useAuthStore } from "@/stores/auth"
 
 const auth = useAuthStore();
 
+const getUsersActivity = async () => {
+  const response = await axios.get('user/activity');
+  return response.data
+}
+
 const getProfile = async (id) => {
   const response = await axios.get(`user/${id}`);
   return response.data
@@ -23,6 +28,7 @@ const addPost = async (data) => {
 }
 
 export default {
+  getUsersActivity,
   getProfile,
   editProfile,
   addPost
