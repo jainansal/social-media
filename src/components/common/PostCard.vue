@@ -1,12 +1,9 @@
 <template>
   <div class="border-2 rounded-2xl border-slate-400 p-2 gap-6 flex flex-col">
     <div class="flex gap-2 items-center">
-      <img
-        src="https://www.mintface.xyz/content/images/2021/08/QmTndiF423kjdXsNzsip1QQkBQqDuzDhJnGuJAXtv4XXiZ-1.png"
-        class="h-12 w-12 object-cover rounded-full"
-      />
+      <img :src="user.pfp" class="h-12 w-12 object-cover rounded-full" />
       <div>
-        <h4 class="text-xl font-semibold">Ansal Jain</h4>
+        <h4 class="text-xl font-semibold">{{ user.fullName }}</h4>
         <p class="text-xs">{{ updatedAt }}</p>
       </div>
     </div>
@@ -28,7 +25,7 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { reactive, ref } from "vue";
 
 import postServices from "@/services/post";
 
@@ -37,10 +34,16 @@ const props = defineProps({
     type: String,
   },
 });
+const isLiked = ref(false);
+
 const content = ref("");
 const likes = ref([]);
 const likeCount = ref(0);
 const updatedAt = ref(null);
+const user = reactive({
+  fullName: "",
+  pfp: "",
+});
 
 const getPost = async () => {
   try {
@@ -50,14 +53,13 @@ const getPost = async () => {
     likes.value = data.likes;
     likeCount.value = data.likeCount;
     updatedAt.value = data.updatedAt;
+    user.fullName = data.author.firstName + " " + data.author.lastName;
+    user.pfp = data.author.profileImg;
   } catch (err) {
     console.log(err);
   }
 };
-
 getPost();
-
-const isLiked = ref(false);
 
 const toggleLiked = () => {
   isLiked.value = !isLiked.value;

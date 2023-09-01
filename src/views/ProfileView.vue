@@ -40,7 +40,7 @@ const profile = reactive({
   email: "",
   profileImg: "",
 });
-const posts = ref([])
+const posts = ref([]);
 
 const getUserData = async () => {
   try {
@@ -49,7 +49,7 @@ const getUserData = async () => {
     profile.fullName = response.firstName + " " + response.lastName;
     profile.email = response.email;
     profile.profileImg = response.profileImg;
-    posts.value = response.posts
+    posts.value = response.posts;
   } catch (err) {
     console.log("Error fetching user data", err);
   } finally {
