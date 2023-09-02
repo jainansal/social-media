@@ -21,6 +21,13 @@ const editProfile = async (data) => {
   })
 }
 
+const updateFollowing = async (id) => {
+  const response = await axios.put(`user/following`, {
+    newUser: id
+  })
+  return response.data
+}
+
 const addPost = async (data) => {
   const response = await axios.post(`post`, {
     content: data
@@ -31,5 +38,6 @@ export default {
   getUsersActivity,
   getProfile,
   editProfile,
+  updateFollowing,
   addPost
 }

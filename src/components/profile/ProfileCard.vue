@@ -48,6 +48,7 @@ import EditProfile from "../modals/EditProfile.vue";
 import AppLoader from "@/components/common/AppLoader.vue";
 import { useAuthStore } from "@/stores/auth";
 import { useUserStore } from "@/stores/user";
+import userServices from "@/services/user";
 
 const authStore = useAuthStore();
 const userStore = useUserStore();
@@ -59,21 +60,33 @@ const props = defineProps({
 
 const { userId } = storeToRefs(authStore);
 const { following } = storeToRefs(userStore);
+const { setFollowing } = userStore;
 const showModal = ref(false);
 const isLoading = ref(false);
 const isFollowing = ref(false);
 
-if (following.value.includes(props.details.userId)) {
-  isFollowing.value = true;
-}
+const updateVal = () => {
+  if (following.value.includes(props.details.userId)) {
+    isFollowing.value = true;
+  } else {
+    isFollowing.value = false;
+  }
+};
+updateVal();
 
 const toggleModal = () => {
   console.log(showModal.value);
   showModal.value = !showModal.value;
 };
 
-const toggleFollowing = () => {
-  isFollowing.value = !isFollowing.value;
+const toggleFollowing = async () => {
+  try {
+    const response = await userServices.updateFollowing(props.details.userId);
+    setFollowing(response);
+    updateVal();
+  } catch (err) {
+    console.log(err);
+  }
 };
 </script>
 
