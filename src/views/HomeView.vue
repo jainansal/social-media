@@ -15,6 +15,7 @@
 <script setup>
 import { ref } from "vue";
 import { useToast } from "vue-toastification";
+import { storeToRefs } from "pinia";
 
 import NewPost from "@/components/common/NewPost.vue";
 import PostCard from "@/components/common/PostCard.vue";
@@ -24,25 +25,31 @@ import FriendsActivityIndex from "@/components/friends_activity/Index.vue";
 import LabelSection from "@/components/common/LabelSection.vue";
 import PostSection from "@/components/common/PostSection.vue";
 import postServices from "@/services/post";
+import { usePostsStore } from "@/stores/posts";
 
+const postsStore = usePostsStore();
+const { posts, init } = storeToRefs(postsStore);
+const { setPosts, setInit } = postsStore;
 const toast = useToast();
 const isLoading = ref(false);
 
-const posts = ref([]);
-
 const getPosts = async () => {
   try {
+    console.log('...fetching posts...')
     isLoading.value = true;
     const response = await postServices.getAllPosts();
-    posts.value = response;
+    setPosts(response);
   } catch (err) {
     toast.error(err.data);
     console.log(err);
   } finally {
     isLoading.value = false;
+    setInit();
   }
 };
-getPosts();
+if (!init.value) {
+  getPosts();
+}
 </script>
 
 <style lang="scss" scoped>
