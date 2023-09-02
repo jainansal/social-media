@@ -1,0 +1,8 @@
+- [] skeleton loader
+- [] ui/ux update
+- [] trending section
+- [X] follow/unfollow basic
+- [X] following debugging
+- [X] to use userStore - 1
+- [] to use userStore - 2
+- [] readme update
