@@ -34,6 +34,7 @@ let { id } = route.params;
 if (!id) id = auth.userId;
 
 const profile = reactive({
+  userId: id,
   fullName: "",
   email: "",
   profileImg: "",
