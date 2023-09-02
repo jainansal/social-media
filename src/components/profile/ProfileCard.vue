@@ -47,8 +47,10 @@ import LabelSection from "@/components/common/LabelSection.vue";
 import EditProfile from "../modals/EditProfile.vue";
 import AppLoader from "@/components/common/AppLoader.vue";
 import { useAuthStore } from "@/stores/auth";
+import { useUserStore } from "@/stores/user";
 
 const authStore = useAuthStore();
+const userStore = useUserStore();
 const props = defineProps({
   details: {
     type: Object,
@@ -56,9 +58,14 @@ const props = defineProps({
 });
 
 const { userId } = storeToRefs(authStore);
+const { following } = storeToRefs(userStore);
 const showModal = ref(false);
 const isLoading = ref(false);
 const isFollowing = ref(false);
+
+if (following.value.includes(props.details.userId)) {
+  isFollowing.value = true;
+}
 
 const toggleModal = () => {
   console.log(showModal.value);

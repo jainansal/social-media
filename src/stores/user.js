@@ -8,6 +8,7 @@ export const useUserStore = defineStore('user', () => {
   const email = ref('')
   const fullName = computed(() => firstName.value + ' ' + lastName.value)
   const posts = ref([])
+  const following = ref([])
 
   const setFirstName = (value) => {
     firstName.value = value
@@ -24,6 +25,9 @@ export const useUserStore = defineStore('user', () => {
   const setPosts = (value) => {
     posts.value = value
   }
+  const setFollowing = (value) => {
+    following.value = value;
+  }
   const reset = () => {
     firstName.value = ''
     lastName.value = ''
@@ -37,11 +41,13 @@ export const useUserStore = defineStore('user', () => {
     email,
     fullName,
     posts,
+    following,
     setFirstName,
     setLastName,
     setEmail,
     setProfileImg,
     setPosts,
+    setFollowing,
     reset
   }
 })

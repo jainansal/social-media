@@ -53,6 +53,7 @@ router.beforeEach(async (to, from, next) => {
   if (!auth.loggedIn) {
     try {
       const data = await authServices.init()
+      // console.log('data',data.data)
       auth.setLoggedIn(true)
       auth.setUserId(data.data._id)
       user.setFirstName(data.data.firstName)
@@ -60,6 +61,7 @@ router.beforeEach(async (to, from, next) => {
       user.setEmail(data.data.email)
       user.setProfileImg(data.data.profileImg)
       user.setPosts(data.data.posts)
+      user.setFollowing(data.data.following)
       console.log(user.$state)
     } catch (err) {
       console.log(err)
