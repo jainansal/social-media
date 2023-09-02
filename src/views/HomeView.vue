@@ -5,9 +5,7 @@
     <div class="h-full flex overflow-hidden">
       <FriendsActivityIndex />
       <PostSection :posts="posts" :withDetails="true" />
-      <div class="basis-1/4 p-4 bg-slate-600 m-6 ml-3">
-        <LabelSection label="Trending" />
-      </div>
+      <NewsSection />
     </div>
   </div>
 </template>
@@ -22,8 +20,8 @@ import PostCard from "@/components/common/PostCard.vue";
 import AppLoader from "@/components/common/AppLoader.vue";
 import AppNavbar from "../components/common/AppNavbar.vue";
 import FriendsActivityIndex from "@/components/friends_activity/Index.vue";
-import LabelSection from "@/components/common/LabelSection.vue";
 import PostSection from "@/components/common/PostSection.vue";
+import NewsSection from "../components/common/NewsSection.vue";
 import postServices from "@/services/post";
 import { usePostsStore } from "@/stores/posts";
 
@@ -35,7 +33,7 @@ const isLoading = ref(false);
 
 const getPosts = async () => {
   try {
-    console.log('...fetching posts...')
+    console.log("...fetching posts...");
     isLoading.value = true;
     const response = await postServices.getAllPosts();
     setPosts(response);
