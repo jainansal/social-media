@@ -14,8 +14,8 @@
         <i class="fa-solid fa-magnifying-glass"></i>
         <input
           type="text"
-          placeholder="Search"
-          class="bg-inherit focus:outline-none"
+          placeholder="Search" 
+          class="bg-inherit focus:outline-none w-full"
         />
       </div>
     </div>
