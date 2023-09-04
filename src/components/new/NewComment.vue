@@ -5,7 +5,7 @@
     <input
       type="text"
       placeholder="Add comment"
-      class="bg-inherit focus:outline-none w-full"
+      class="bg-inherit focus:outline-none w-full font-light"
     />
     <i class="fa-solid fa-paper-plane text-violet-400 cursor-pointer"></i>
   </div>
