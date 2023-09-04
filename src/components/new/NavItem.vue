@@ -1,5 +1,5 @@
 <template>
-  <div class="text-center text-xl text-zinc-500 cursor-pointer" :class="{
+  <div class="text-left text-2xl text-zinc-500 cursor-pointer" :class="{
     'text-violet-400 font-semibold': isActive
   }">
     {{ text }}

@@ -7,15 +7,6 @@ const navItems = [
   'News',
   'Resources',
   'Settings',
-  'Settings',
-  'Settings',
-  'Settings',
-  'Settings',
-  'Settings',
-  'Settings',
-  'Settings',
-  'Settings',
-  'Settings',
 ]
 
 export default navItems

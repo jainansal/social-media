@@ -2,12 +2,12 @@
   <div
     class="flex flex-col basis-1/4 h-full bg-zinc-800 rounded-3xl text-zinc-300 p-4"
   >
-    <div class="flex items-center justify-center pb-2 border-b border-zinc-700">
+    <div class="flex items-center justify-center pb-2 border-b border-zinc-700 h-12">
       <h1 class="font-bold text-4xl">SOCIALS</h1>
     </div>
-    <div class="flex items-center justify-center pt-4">
+    <div class="flex items-center justify-center pt-4 h-16">
       <div
-        class="border flex flex-row items-center p-2 gap-2 rounded-full border-zinc-700 w-75"
+        class="border flex flex-row items-center p-2 gap-2 rounded-full border-zinc-700 w-3/4"
       >
         <i class="fa-solid fa-magnifying-glass"></i>
         <input
