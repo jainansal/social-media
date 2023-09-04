@@ -1,12 +1,10 @@
 const navItems = [
-  'My Profile',
-  'My Channels',
-  'My Friends',
-  'Messages',
-  'Arcade',
-  'News',
-  'Resources',
-  'Settings',
+  'Home',
+  'Trending',
+  'Friends',
+  'Profile',
+  'Requests',
+  'Settings'
 ]
 
 export default navItems

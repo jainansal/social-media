@@ -19,7 +19,7 @@
         />
       </div>
     </div>
-    <div class="h-full py-8 flex flex-col gap-4 overlay">
+    <div class="h-full py-8 flex flex-col gap-4 overlay items-center">
       <NavItem
         v-for="(item, index) in navItems"
         :key="index"
