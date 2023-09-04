@@ -1,31 +1,5 @@
 <template>
-  <div class="basis-1/2 flex flex-col gap-4 overlay rounded-3xl">
-    <PostCard />
-    <PostCard />
-    <PostCard />
-    <PostCard />
-    <PostCard />
-    <PostCard />
-    <PostCard />
-    <PostCard />
-    <PostCard />
-    <PostCard />
-    <PostCard />
-    <PostCard />
-    <PostCard />
-    <PostCard />
-    <PostCard />
-    <PostCard />
-    <PostCard />
-    <PostCard />
-    <PostCard />
-    <PostCard />
-    <PostCard />
-    <PostCard />
-    <PostCard />
-    <PostCard />
-    <PostCard />
-    <PostCard />
+  <div class="basis-1/2 flex flex-col gap-4 overlay ">
     <PostCard />
     <PostCard />
     <PostCard />
