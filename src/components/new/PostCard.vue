@@ -6,11 +6,10 @@
         alt="pfp"
         class="w-10 h-10 object-cover rounded-full"
       />
-      <div class="flex flex-col"> 
+      <div class="flex flex-col">
         <div class="text-lg font-semibold">Ansal Jain</div>
         <div class="text-xs">5 mins ago</div>
       </div>
-
     </div>
     <div class="font-light text-lg">I am a great guy!</div>
     <div class="flex mt-1 gap-2">
@@ -40,14 +39,14 @@
         ></i>
       </div>
     </div>
-    <div v-if="showComments" class="transition-all">
-      <div class="font-light">wtf was that</div>
-    </div>
+    <CommentSection v-if="showComments" />
   </div>
 </template>
 
 <script setup>
 import { ref } from "vue";
+
+import CommentSection from "./CommentSection.vue";
 
 const showComments = ref(false);
 const toggleShowComments = () => {
