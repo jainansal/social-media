@@ -1,6 +1,5 @@
 const navItems = [
   'Home',
-  'Trending',
   'Friends',
   'Profile',
   'Requests',
