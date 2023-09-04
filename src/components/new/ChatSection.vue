@@ -13,7 +13,7 @@
 
     </div>
     <div class="h-20 pt-2 border-t border-zinc-700 w-full flex items-center justify-center">
-      <div class="bg-violet-400 w-3/4 h-full rounded-lg flex items-center justify-center text-zinc-900 font-bold cursor-pointer">
+      <div class="bg-violet-400 w-3/4 h-full rounded-md flex items-center justify-center text-zinc-900 font-bold cursor-pointer">
         + New Chat
       </div>
     </div>
