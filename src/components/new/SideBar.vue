@@ -37,10 +37,16 @@
         <img
           src="https://exploringbits.com/wp-content/uploads/2022/01/Manga-PFP-1.jpg?ezimgfmt=ng%3Awebp%2Fngcb3%2Frs%3Adevice%2Frscb3-1"
           alt="pfp"
-          class="h-16 w-16 object-cover rounded-md"
+          class="h-16 w-16 object-cover rounded-md cursor-pointer"
+          @click="visitProfile"
         />
         <div>
-          <div class="text-lg font-semibold">Ansal Jain</div>
+          <div
+            class="text-lg font-semibold cursor-pointer hover:text-violet-300"
+            @click="visitProfile"
+          >
+            Ansal Jain
+          </div>
           <div class="text-zinc-600 flex items-center gap-1">
             <div class="h-3 w-3 bg-green-600 rounded-full"></div>
             Online
@@ -56,8 +62,9 @@
 
 <script setup>
 import { ref } from "vue";
-import { useRoute } from "vue-router";
+import { useRoute, useRouter } from "vue-router";
 const route = useRoute();
+const router = useRouter();
 
 import NavItem from "@/components/new/NavItem.vue";
 import navItems from "@/components/new/navItems";
@@ -65,6 +72,10 @@ import navItems from "@/components/new/navItems";
 const activeIndex = ref(route.name);
 const buttonClick = (val) => {
   activeIndex.value = val;
+};
+
+const visitProfile = () => {
+  router.push({ name: "profile" });
 };
 </script>
 
