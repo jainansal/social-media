@@ -14,18 +14,21 @@
         <i class="fa-solid fa-magnifying-glass"></i>
         <input
           type="text"
-          placeholder="Search" 
+          placeholder="Search"
           class="bg-inherit focus:outline-none w-full"
         />
       </div>
     </div>
-    <div class="h-full py-8 flex flex-col gap-4 overlay items-center">
-      <NavItem
-        v-for="(item, index) in navItems"
-        :key="index"
-        :text="item"
-        :isActive="index == 0"
-      />
+    <div class="h-full py-4 overflow-hidden">
+      <div class="grid grid-cols-2 gap-4">
+        <NavItem
+          v-for="(item, index) in navItems"
+          :key="index"
+          :details="item"
+          :isActive="index == activeIndex"
+          @buttonClick="buttonClick(index)"
+        />
+      </div>
     </div>
     <div
       class="pt-2 border-t border-zinc-700 flex justify-between items-center"
@@ -52,8 +55,15 @@
 </template>
 
 <script setup>
+import { ref } from "vue";
+
 import NavItem from "@/components/new/NavItem.vue";
 import navItems from "@/components/new/navItems";
+
+const activeIndex = ref(0);
+const buttonClick = (idx) => {
+  activeIndex.value = idx;
+};
 </script>
 
 <style lang="scss" scoped>
