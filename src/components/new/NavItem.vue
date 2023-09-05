@@ -16,6 +16,9 @@
 </template>
 
 <script setup>
+import { useRouter } from "vue-router";
+const router = useRouter();
+
 const emits = defineEmits(["buttonClick"]);
 const props = defineProps({
   details: Object,
@@ -27,6 +30,7 @@ const props = defineProps({
 
 const buttonClick = () => {
   emits("buttonClick");
+  router.push({name: props.details.to});
 };
 </script>
 

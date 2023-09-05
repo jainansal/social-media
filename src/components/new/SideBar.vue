@@ -25,8 +25,8 @@
           v-for="(item, index) in navItems"
           :key="index"
           :details="item"
-          :isActive="index == activeIndex"
-          @buttonClick="buttonClick(index)"
+          :isActive="item.to == activeIndex"
+          @buttonClick="buttonClick(item.to)"
         />
       </div>
     </div>
@@ -56,13 +56,15 @@
 
 <script setup>
 import { ref } from "vue";
+import { useRoute } from "vue-router";
+const route = useRoute();
 
 import NavItem from "@/components/new/NavItem.vue";
 import navItems from "@/components/new/navItems";
 
-const activeIndex = ref(0);
-const buttonClick = (idx) => {
-  activeIndex.value = idx;
+const activeIndex = ref(route.name);
+const buttonClick = (val) => {
+  activeIndex.value = val;
 };
 </script>
 
