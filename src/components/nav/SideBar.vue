@@ -53,7 +53,10 @@
           </div>
         </div>
       </div>
-      <div class="bg-red-700 py-1 px-2 rounded-lg cursor-pointer">
+      <div
+        class="bg-red-700 py-1 px-2 rounded-lg cursor-pointer"
+        @click="logoutUser"
+      >
         <i class="fa-solid fa-right-from-bracket fa-lg"></i>
       </div>
     </div>
@@ -68,6 +71,7 @@ const router = useRouter();
 
 import NavItem from "@/components/nav/NavItem.vue";
 import navItems from "@/components/nav/navItems.js";
+import authServices from "@/services/auth.js";
 
 const activeIndex = ref(route.name);
 const buttonClick = (val) => {
@@ -76,6 +80,16 @@ const buttonClick = (val) => {
 
 const visitProfile = () => {
   router.push({ name: "profile" });
+};
+
+const logoutUser = async () => {
+  try {
+    await authServices.logout();
+  } catch (error) {
+    console.log(error);
+  } finally {
+    router.go();
+  }
 };
 </script>
 

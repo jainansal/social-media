@@ -57,8 +57,8 @@ const router = createRouter({
 });
 
 router.beforeEach(async (to, from, next) => {
-  const publicPages = ['/login', '/register']
-  const authRequired = !publicPages.includes(to.path)
+  const publicPages = ['login', 'register']
+  const authRequired = !publicPages.includes(to.name)
   const authStore = useAuthStore();
 
   if (!authStore.init) {
@@ -77,7 +77,7 @@ router.beforeEach(async (to, from, next) => {
     }
   }
 
-  if (to.name === 'login' || to.name === 'register' && authStore.loggedIn) {
+  if ((to.name === 'login' || to.name === 'register') && authStore.loggedIn) {
     next('/')
   } else {
     next()

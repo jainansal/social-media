@@ -9,7 +9,11 @@ const login = async (data) => {
 }
 
 const init = async () => {
-  await axios.get('auth/init')
+  try {
+    await axios.get('auth/init')
+  } catch (error) {
+    throw error
+  }
 }
 
 const register = async (data) => {
