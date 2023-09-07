@@ -35,7 +35,7 @@
     >
       <div class="flex gap-2 items-center">
         <img
-          src="https://exploringbits.com/wp-content/uploads/2022/01/Manga-PFP-1.jpg?ezimgfmt=ng%3Awebp%2Fngcb3%2Frs%3Adevice%2Frscb3-1"
+          :src="userStore.pfp"
           alt="pfp"
           class="h-16 w-16 object-cover rounded-md cursor-pointer"
           @click="visitProfile"
@@ -45,7 +45,7 @@
             class="text-lg font-semibold cursor-pointer hover:text-violet-300"
             @click="visitProfile"
           >
-            Ansal Jain
+            {{ userStore.name }}
           </div>
           <div class="text-zinc-600 flex items-center gap-1">
             <div class="h-3 w-3 bg-green-600 rounded-full"></div>
@@ -72,6 +72,27 @@ const router = useRouter();
 import NavItem from "@/components/nav/NavItem.vue";
 import navItems from "@/components/nav/navItems.js";
 import authServices from "@/services/auth.js";
+import userServices from "@/services/user.js";
+import { useUserStore } from "@/stores/user.js";
+import { useAuthStore } from "@/stores/auth.js";
+const userStore = useUserStore();
+const authStore = useAuthStore();
+
+if (!userStore.id) {
+  const getDetails = async () => {
+    try {
+      const response = await userServices.getBasicDetails(authStore.id);
+      userStore.setID(response._id);
+      userStore.setName(response.name);
+      userStore.setUsername(response.username);
+      userStore.setBio(response.bio);
+      userStore.setPfp(response.pfp);
+    } catch (error) {
+      console.log("error", error);
+    }
+  };
+  getDetails();
+}
 
 const activeIndex = ref(route.name);
 const buttonClick = (val) => {

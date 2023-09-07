@@ -1,7 +1,9 @@
 import axios from "axios";
-import { useAuthStore } from "@/stores/auth"
 
-const auth = useAuthStore();
+const getBasicDetails = async (id) => {
+  const response = await axios.get(`user/basic/${id}`);
+  return response.data
+}
 
 const getUsersActivity = async () => {
   const response = await axios.get('user/activity');
@@ -13,13 +15,13 @@ const getProfile = async (id) => {
   return response.data
 }
 
-const editProfile = async (data) => {
-  const response = await axios.put(`user/${auth.userId}`, {
-    firstName: data.firstName,
-    lastName: data.lastName,
-    profileImg: data.profileImg
-  })
-}
+// const editProfile = async (data) => {
+//   const response = await axios.put(`user/${auth.id}`, {
+//     firstName: data.firstName,
+//     lastName: data.lastName,
+//     profileImg: data.profileImg
+//   })
+// }
 
 const updateFollowing = async (id) => {
   const response = await axios.put(`user/following`, {
@@ -35,9 +37,10 @@ const addPost = async (data) => {
 }
 
 export default {
+  getBasicDetails,
   getUsersActivity,
   getProfile,
-  editProfile,
+  // editProfile,
   updateFollowing,
   addPost
 }
