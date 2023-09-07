@@ -9,23 +9,15 @@ const login = async (data) => {
 }
 
 const init = async () => {
-  try {
-    const response = await axios.get('auth/init')
-    return response
-  } catch (err) {
-    console.log(err)
-    throw err
-  }
+  await axios.get('auth/init')
 }
 
 const register = async (data) => {
-  const response = await axios.post('auth/register', {
-    email: data.email,
-    firstName: data.firstName,
-    lastName: data.lastName,
+  await axios.post('auth/register', {
+    name: data.name,
+    username: data.username,
     password: data.password
   })
-  return response
 }
 
 const logout = async () => {
