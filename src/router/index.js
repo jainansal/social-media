@@ -64,8 +64,8 @@ router.beforeEach(async (to, from, next) => {
   if (!authStore.init) {
     authStore.setInit();
     try {
-      await authServices.init();
-      authStore.setLoggedIn();
+      const response = await authServices.init();
+      authStore.setID(response.id);
     } catch (error) {
       console.log(error)
       toast.error(error.response.data.message || "Some error occured");
@@ -77,7 +77,7 @@ router.beforeEach(async (to, from, next) => {
     }
   }
 
-  if ((to.name === 'login' || to.name === 'register') && authStore.loggedIn) {
+  if ((to.name === 'login' || to.name === 'register') && authStore.id) {
     next('/')
   } else {
     next()

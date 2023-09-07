@@ -10,15 +10,15 @@ export const useAuthStore = defineStore('auth', () => {
     init.value = true;
   }
 
-  const loggedIn = ref(false);
-  const setLoggedIn = () => {
-    loggedIn.value = true;
+  const id = ref('');
+  const setID = (value) => {
+    id.value = value
   }
 
   return {
     init,
     setInit,
-    loggedIn,
-    setLoggedIn
+    id,
+    setID
   };
 })

@@ -13,7 +13,8 @@ const login = async (data) => {
 
 const init = async () => {
   try {
-    await axios.get('auth/init')
+    const response = await axios.get('auth/init')
+    return response.data
   } catch (error) {
     throw error
   }
