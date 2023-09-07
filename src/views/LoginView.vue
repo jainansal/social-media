@@ -5,10 +5,10 @@
       <h1 class="font-semibold text-4xl">SOCIALS</h1>
       <form class="flex flex-col gap-3" @submit.prevent="handleSubmit">
         <input
-          type="email"
-          placeholder="Email Address"
+          type="text"
+          placeholder="Username"
           class="p-3 text-lg bg-slate-800 focus:outline-none"
-          v-model="formData.email"
+          v-model="formData.username"
           required
         />
         <input
@@ -49,7 +49,7 @@ const errorMsg = ref("");
 
 // Specific variables
 const formData = reactive({
-  email: "",
+  username: "",
   password: "",
 });
 
