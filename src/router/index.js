@@ -14,27 +14,27 @@ const routes = [
       {
         path: 'home',
         name: 'home',
-        component: () => import('@/views/new/HomeView.vue')
+        component: () => import('@/views/HomeView.vue')
       },
       {
         path: 'friends',
         name: 'friends',
-        component: () => import('@/views/new/FriendsView.vue')
+        component: () => import('@/views/FriendsView.vue')
       },
       {
         path: 'requests',
         name: 'requests',
-        component: () => import('@/views/new/RequestsView.vue')
+        component: () => import('@/views/RequestsView.vue')
       },
       {
         path: 'profile',
         name: 'profile',
-        component: () => import('@/views/new/ProfileView.vue')
+        component: () => import('@/views/ProfileView.vue')
       },
       {
         path: 'settings',
         name: 'settings',
-        component: () => import('@/views/new/SettingsView.vue')
+        component: () => import('@/views/SettingsView.vue')
       }
     ]
   }

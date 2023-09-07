@@ -39,7 +39,7 @@
 
 <script setup>
 import FriendsInput from "../components/friends/FriendsInput.vue";
-import FriendCard from "@/components/new/FriendCard.vue"
+import FriendCard from "@/components/friends/FriendCard.vue"
 </script>
 
 <style lang="scss" scoped>

@@ -21,7 +21,7 @@
 </template>
 
 <script setup>
-import Badges from "../new/Badges.vue";
+import Badges from "./Badges.vue";
 </script>
 
 <style lang="scss" scoped>

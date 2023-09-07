@@ -14,7 +14,7 @@
 <script setup>
 import { ref } from "vue";
 
-import FriendCard from "@/components/new/FriendCard.vue";
+import FriendCard from "@/components/friends/FriendCard.vue";
 
 const requests = ref(1);
 </script>

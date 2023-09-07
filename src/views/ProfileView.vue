@@ -9,7 +9,7 @@
 <script setup>
 import ProfileHeader from "../components/profile/ProfileHeader.vue";
 import ProfileMid from "../components/profile/ProfileMid.vue";
-import PostCard from "@/components/new/PostCard.vue"
+import PostCard from "@/components/posts/PostCard.vue"
 </script>
 
 <style lang="scss" scoped>

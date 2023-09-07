@@ -66,8 +66,8 @@ import { useRoute, useRouter } from "vue-router";
 const route = useRoute();
 const router = useRouter();
 
-import NavItem from "@/components/new/NavItem.vue";
-import navItems from "@/components/new/navItems";
+import NavItem from "@/components/nav/NavItem.vue";
+import navItems from "@/components/nav/navItems.js";
 
 const activeIndex = ref(route.name);
 const buttonClick = (val) => {
