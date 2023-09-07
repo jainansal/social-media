@@ -46,7 +46,7 @@
 <script setup>
 import { ref } from "vue";
 
-import CommentSection from "./CommentSection.vue";
+import CommentSection from "../comment/CommentSection.vue";
 
 const showComments = ref(false);
 const toggleShowComments = () => {

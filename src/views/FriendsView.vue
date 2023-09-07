@@ -38,7 +38,7 @@
 </template>
 
 <script setup>
-import FriendsInput from "../../components/new/FriendsInput.vue";
+import FriendsInput from "../components/friends/FriendsInput.vue";
 import FriendCard from "@/components/new/FriendCard.vue"
 </script>
 

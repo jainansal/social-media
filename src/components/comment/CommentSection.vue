@@ -8,7 +8,7 @@
 
 <script setup>
 import CommentItem from "./CommentItem.vue";
-import NewComment from "./NewComment.vue";
+import NewComment from "../new/NewComment.vue";
 </script>
 
 <style lang="scss" scoped>

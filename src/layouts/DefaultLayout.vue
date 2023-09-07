@@ -7,8 +7,8 @@
 </template>
 
 <script setup>
-import ChatSection from "../components/new/ChatSection.vue";
-import SideBar from "../components/new/SideBar.vue";
+import ChatSection from "../components/chat/ChatSection.vue";
+import SideBar from "../components/nav/SideBar.vue";
 </script>
 
 <style lang="scss" scoped>
