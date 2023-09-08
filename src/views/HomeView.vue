@@ -42,11 +42,9 @@ import AppLoader from "@/components/common/AppLoader.vue";
 import NewPost from "../components/posts/NewPost.vue";
 import PostCard from "../components/posts/PostCard.vue";
 
-import { usePostsStore } from "@/stores/posts.js";
 import postServices from "@/services/post.js";
 
 // Config
-const postsStore = usePostsStore();
 const isLoading = ref(false);
 
 // Main
@@ -56,15 +54,14 @@ const setActiveQuery = (val) => {
   init();
 };
 
+const posts = ref([]);
 const init = async () => {
-  if (activeQuery.value === "all" && !postsStore.initAll) {
+  if (activeQuery.value === "all") {
     console.log("all");
     try {
       isLoading.value = true;
       const response = await postServices.getAllPosts();
-      postsStore.setAllPosts(response);
-      postsStore.setInitAll();
-      console.log(response);
+      posts.value = response;
     } catch (error) {
       console.log("Error", error);
     } finally {
@@ -72,13 +69,12 @@ const init = async () => {
     }
   }
 
-  if (activeQuery.value === "trending" && !postsStore.initTrending) {
+  if (activeQuery.value === "trending") {
     console.log("trending");
     try {
       isLoading.value = true;
       const response = await postServices.getTrendingPosts();
-      postsStore.setTrendingPosts(response);
-      postsStore.setInitTrending();
+      posts.value = response;
     } catch (error) {
       console.log("Error", error);
     } finally {
@@ -86,13 +82,12 @@ const init = async () => {
     }
   }
 
-  if (activeQuery.value === "friends" && !postsStore.initFriends) {
+  if (activeQuery.value === "friends") {
     console.log("friends");
     try {
       isLoading.value = true;
       const response = await postServices.getFriendsPosts();
-      postsStore.setFriendsPosts(response);
-      postsStore.setInitFriends();
+      posts.value = response;
     } catch (error) {
       console.log("Error", error);
     } finally {
@@ -101,15 +96,6 @@ const init = async () => {
   }
 };
 init();
-
-const posts = ref([]);
-if (activeQuery.value === "all") {
-  posts.value = postsStore.allPosts;
-} else if (activeQuery.value === "trending") {
-  posts.value = postsStore.trendingPosts;
-} else {
-  posts.value = postsStore.friendsPosts;
-}
 </script>
 
 <style lang="scss" scoped>

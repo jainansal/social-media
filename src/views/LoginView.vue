@@ -57,16 +57,12 @@ const handleSubmit = async () => {
   try {
     isLoading.value = true;
     await authServices.login(formData);
-    router.push({ name: "home" });
+    router.go();
   } catch (error) {
     toast.error("Some error occured");
   } finally {
     isLoading.value = false;
   }
-};
-
-const linkTo = (path) => {
-  router.push({ name: path });
 };
 </script>
 
