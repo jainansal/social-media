@@ -40,6 +40,7 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
+  details: Object,
 });
 
 const isFriend = ref(false);

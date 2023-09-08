@@ -20,6 +20,11 @@ const getUserPosts = async (id) => {
   return response.data
 }
 
+const getUserFriends = async (id) => {
+  const response = await axios.get(`user/friends/${id}`);
+  return response.data
+}
+
 // const editProfile = async (data) => {
 //   const response = await axios.put(`user/${auth.id}`, {
 //     firstName: data.firstName,
@@ -46,6 +51,7 @@ export default {
   getUsersActivity,
   getProfile,
   getUserPosts,
+  getUserFriends,
   // editProfile,
   updateFollowing,
   addPost
