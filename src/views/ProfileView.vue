@@ -36,8 +36,8 @@ const getUserPosts = async () => {
 
 const getUserFriends = async () => {
   try {
-    const response = await userServices.getUserPosts(authStore.id);
-    userPosts.value = response;
+    const response = await userServices.getUserFriends(authStore.id);
+    userFriends.value = response;
   } catch (err) {
     console.log("Error", err);
   }
