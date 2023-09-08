@@ -1,10 +1,14 @@
 <template>
   <div
-    v-if="requests"
+    v-if="requests.length"
     class="basis-1/2 grid grid-cols-4 gap-4 overlay h-full rounded-3xl"
   >
-    <FriendCard :isRequestCard="true" />
-    <FriendCard :isRequestCard="true" />
+    <FriendCard 
+      v-for="(user,index) in requests"
+      :key="index"
+      :details="user"
+      :isRequestCard="true"
+    />
   </div>
   <div v-else class="basis-1/2 rounded-3xl text-3xl flex justify-center items-center">
     You have no requests at the moment, come back later.
@@ -14,9 +18,27 @@
 <script setup>
 import { ref } from "vue";
 
+import AppLoader from "@/components/common/AppLoader.vue";
 import FriendCard from "@/components/friends/FriendCard.vue";
 
-const requests = ref(1);
+import userServices from "@/services/user.js";
+
+// config
+const isLoading = ref(false);
+
+const requests = ref([]);
+const getRequestsReceived = async () => {
+  try {
+    isLoading.value = true;
+    const response = await userServices.getRequestsReceived();
+    requests.value = response;
+  } catch (err) {
+    console.log("Error", err);
+  } finally {
+    isLoading.value = false;
+  }
+}
+getRequestsReceived();
 </script>
 
 <style lang="scss" scoped>
