@@ -65,7 +65,7 @@ const props = defineProps({
 const relTime = computed(() => util.timeFromNow(props.details.createdAt));
 
 const isLiked = ref(props.details.likes.includes(authStore.id));
-const likeCount = ref(props.details.likes.length);
+const likeCount = ref(props.details.likeCount);
 
 const showComments = ref(false);
 const toggleShowComments = () => {

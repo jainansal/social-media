@@ -19,9 +19,7 @@
           required
         />
         <div class="flex justify-between items-center mt-5">
-          <p class="cursor-pointer" @click="linkTo('register')">
-            Create account
-          </p>
+          <p class="cursor-pointer" @click="link('register')">Create account</p>
           <button class="p-2 bg-violet-800 cursor-pointer">Login</button>
         </div>
       </form>
@@ -63,6 +61,10 @@ const handleSubmit = async () => {
   } finally {
     isLoading.value = false;
   }
+};
+
+const link = (path) => {
+  router.push({ name: path });
 };
 </script>
 
