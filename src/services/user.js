@@ -30,6 +30,12 @@ const getRequestsReceived = async (id) => {
   return response.data
 }
 
+const addPost = async (data) => {
+  const response = await axios.post(`post`, {
+    content: data
+  })
+}
+
 // const editProfile = async (data) => {
 //   const response = await axios.put(`user/${auth.id}`, {
 //     firstName: data.firstName,
@@ -45,11 +51,6 @@ const updateFollowing = async (id) => {
   return response.data
 }
 
-const addPost = async (data) => {
-  const response = await axios.post(`post`, {
-    content: data
-  })
-}
 
 export default {
   getBasicDetails,

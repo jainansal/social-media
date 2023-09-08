@@ -31,7 +31,7 @@
         Friends
       </div>
     </div>
-    <PostCard v-for="(post, index) in posts" :key="index" />
+    <PostCard v-for="(post, index) in posts" :key="index" :details="post" />
   </div>
 </template>
 
