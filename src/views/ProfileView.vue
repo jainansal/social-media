@@ -3,7 +3,13 @@
   <div class="basis-1/2 rounded-3xl flex flex-col h-full gap-4">
     <ProfileHeader />
     <ProfileMid :friends="userFriends" :posts="userPosts.length" />
-    <PostCard v-for="(post, index) in userPosts" :key="index" :details="post" />
+    <div class="h-full gap-4 flex flex-col">
+      <PostCard
+        v-for="(post, index) in userPosts"
+        :key="index"
+        :details="post"
+      />
+    </div>
   </div>
 </template>
 
