@@ -3,15 +3,15 @@
     <div
       class="bg-zinc-800 rounded-3xl p-4 basis-1/3 justify-center items-center flex gap-2"
     >
-      <span class="font-bold text-3xl text-violet-400">{{
-        friends.length
-      }}</span>
+      <span class="font-bold text-3xl text-violet-400">{{ posts }}</span>
       Posts
     </div>
     <div
       class="bg-zinc-800 rounded-3xl p-4 basis-1/3 justify-center items-center flex gap-2"
     >
-      <span class="font-bold text-3xl text-violet-400">{{ posts }}</span>
+      <span class="font-bold text-3xl text-violet-400">{{
+        friends.length
+      }}</span>
       Friends
     </div>
     <div

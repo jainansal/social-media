@@ -8,7 +8,7 @@
       />
       <div class="flex flex-col">
         <div class="text-lg font-semibold">{{ details.author.name }}</div>
-        <div class="text-xs">5 mins ago</div>
+        <div class="text-xs">{{ relTime }}</div>
       </div>
     </div>
     <div class="font-light text-lg">{{ details.content }}</div>
@@ -46,9 +46,11 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { computed, ref } from "vue";
 
 import CommentSection from "../comment/CommentSection.vue";
+
+import util from "@/util.js";
 
 // config
 const props = defineProps({
@@ -57,7 +59,7 @@ const props = defineProps({
   },
 });
 
-console.log(props.details);
+const relTime = computed(() => util.timeFromNow(props.details.createdAt));
 
 const showComments = ref(false);
 const toggleShowComments = () => {
