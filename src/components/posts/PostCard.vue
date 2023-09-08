@@ -25,7 +25,7 @@
           }"
         ></i>
         <div class="font-medium">
-          {{ details.likes.length }}
+          {{ likeCount }}
         </div>
       </div>
       <div
@@ -51,8 +51,11 @@ import { computed, ref } from "vue";
 import CommentSection from "../comment/CommentSection.vue";
 
 import util from "@/util.js";
+import { useAuthStore } from "@/stores/auth.js";
+import postServices from "@/services/post.js";
 
 // config
+const authStore = useAuthStore();
 const props = defineProps({
   details: {
     type: Object,
@@ -61,14 +64,26 @@ const props = defineProps({
 
 const relTime = computed(() => util.timeFromNow(props.details.createdAt));
 
+const isLiked = ref(props.details.likes.includes(authStore.id));
+const likeCount = ref(props.details.likes.length);
+
 const showComments = ref(false);
 const toggleShowComments = () => {
   showComments.value = !showComments.value;
 };
 
-const isLiked = ref(false);
-const toggleIsLiked = () => {
-  isLiked.value = !isLiked.value;
+const toggleIsLiked = async () => {
+  try {
+    isLiked.value = !isLiked.value;
+    if (isLiked.value) {
+      likeCount.value = 1 + likeCount.value;
+    } else {
+      likeCount.value = likeCount.value - 1;
+    }
+    await postServices.updateLikes(props.details._id);
+  } catch (error) {
+    console.log("error", error);
+  }
 };
 </script>
 

@@ -20,12 +20,12 @@ const getFriendsPosts = async () => {
   return response.data
 }
 
-const toggleLike = async (id) => {
-  await axios.put(`post/likecomment/${id}`);
+const updateLikes = async (id) => {
+  await axios.put(`post/likes/${id}`);
 }
 
 export default {
-  toggleLike,
+  updateLikes,
   getPost,
   getAllPosts,
   getTrendingPosts,
