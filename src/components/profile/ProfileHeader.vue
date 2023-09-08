@@ -25,8 +25,13 @@
 <script setup>
 import Badges from "./Badges.vue";
 
+import userServices from "@/services/user.js";
 import { useUserStore } from "@/stores/user.js";
+import { useAuthStore } from "@/stores/auth.js";
+
+// config
 const userStore = useUserStore();
+const authStore = useAuthStore();
 
 if (!userStore.id) {
   const getDetails = async () => {

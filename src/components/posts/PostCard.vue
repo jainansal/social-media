@@ -48,6 +48,13 @@ import { ref } from "vue";
 
 import CommentSection from "../comment/CommentSection.vue";
 
+// config
+const props = defineProps({
+  details: {
+    type: Object,
+  },
+});
+
 const showComments = ref(false);
 const toggleShowComments = () => {
   showComments.value = !showComments.value;

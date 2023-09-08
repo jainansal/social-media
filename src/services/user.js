@@ -15,6 +15,11 @@ const getProfile = async (id) => {
   return response.data
 }
 
+const getUserPosts = async (id) => {
+  const response = await axios.get(`post/${id}`);
+  return response.data
+}
+
 // const editProfile = async (data) => {
 //   const response = await axios.put(`user/${auth.id}`, {
 //     firstName: data.firstName,
@@ -40,6 +45,7 @@ export default {
   getBasicDetails,
   getUsersActivity,
   getProfile,
+  getUserPosts,
   // editProfile,
   updateFollowing,
   addPost
