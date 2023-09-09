@@ -3,17 +3,18 @@
     class="w-full aspect-square bg-zinc-800 rounded-3xl flex items-center justify-between flex-col p-4"
   >
     <img
-      src="https://e1.pxfuel.com/desktop-wallpaper/643/772/desktop-wallpaper-%E2%98%AE%EF%B8%8E-cute-aesthetic-pfp.jpg"
+      :src="details.pfp"
       alt="pfp"
       class="w-1/2 aspect-square object-cover rounded-full"
     />
-    <h1 class="font-semibold text-xl pb-1">Gwen Stacy</h1>
+    <h1 class="font-semibold text-xl pb-1">{{ details.name }}</h1>
     <div
       v-if="!isRequestCard"
       class="w-full p-1 text-center border border-violet-400 rounded-md text-violet-400 cursor-pointer"
       :class="{
         'bg-violet-400 text-violet-950': !isFriend,
       }"
+      @click="toggleIsFriend"
     >
       {{ isFriend ? "Friends" : "Add as friend" }}
     </div>
@@ -40,7 +41,13 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
-  details: Object,
+  details: {
+    type: Object,
+    default: {
+      pfp: "https://e1.pxfuel.com/desktop-wallpaper/643/772/desktop-wallpaper-%E2%98%AE%EF%B8%8E-cute-aesthetic-pfp.jpg",
+      name: "Gwen Stacy",
+    },
+  },
 });
 
 const isFriend = ref(false);
