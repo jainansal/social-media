@@ -2,11 +2,25 @@
   <AppLoader :isLoading="isLoading" />
   <div class="basis-1/2 rounded-3xl flex flex-col gap-4">
     <FriendsInput />
-    <div class="grid grid-cols-4 gap-4 overlay h-full rounded-3xl">
+    <div
+      v-if="friends.length"
+      class="grid grid-cols-4 gap-4 overlay h-full rounded-3xl"
+    >
       <FriendCard
         v-for="(friend, index) in friends"
         :key="index"
         :details="friend"
+      />
+    </div>
+    <div v-else class="text-xl flex justify-center">
+      You have no friends at the moment, try reaching out to people.
+    </div>
+    <hr />
+    <div class="grid grid-cols-4 gap-4 overlay h-full rounded-3xl">
+      <FriendCard
+        v-for="(user, index) in allUsers"
+        :key="index"
+        :details="user"
       />
     </div>
   </div>
@@ -38,7 +52,20 @@ const getUserFriends = async () => {
     isLoading.value = false;
   }
 };
-getUserFriends();
+
+const allUsers = ref([]);
+const getAllUsers = async () => {
+  const response = await userServices.getAllUsers();
+  allUsers.value = response;
+};
+
+const init = async () => {
+  isLoading.value = true;
+  await getUserFriends();
+  await getAllUsers();
+  isLoading.value = false;
+};
+init();
 </script>
 
 <style lang="scss" scoped>
