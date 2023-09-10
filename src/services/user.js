@@ -31,6 +31,11 @@ const addPost = async (data) => {
   })
 }
 
+const editDetails = async (data) => {
+  await axios.put(`user/basic`, {
+    ...data
+  });
+}
 
 export default {
   getAllUsers,
@@ -38,5 +43,6 @@ export default {
   getUserPosts,
   getUserFriends,
   getRequestsReceived,
-  addPost
+  addPost,
+  editDetails
 }
