@@ -1,5 +1,6 @@
 <template>
   <AppLoader :isLoading="isLoading" />
+  <DeactivateConfirmation v-if="showModal" @toggle="toggleModal" />
   <div
     class="basis-1/2 rounded-3xl flex flex-col h-full gap-4 items-center justify-between"
   >
@@ -46,8 +47,9 @@
     </div>
 
     <AppButton
-      text="Permanently delete account"
+      text="Deactivate Account"
       class="rounded bg-red-600 text-center w-1/2"
+      @click="toggleModal"
     />
   </div>
 </template>
@@ -58,6 +60,7 @@ import { useRouter } from "vue-router";
 
 import AppButton from "@/components/common/AppButton.vue";
 import AppLoader from "@/components/common/AppLoader.vue";
+import DeactivateConfirmation from "../components/modals/DeactivateConfirmation.vue";
 
 import { useAuthStore } from "@/stores/auth.js";
 import userServices from "@/services/user.js";
@@ -66,6 +69,7 @@ import userServices from "@/services/user.js";
 const isLoading = ref(false);
 const authStore = useAuthStore();
 const router = useRouter();
+const showModal = ref(false);
 
 const details = ref({});
 const name = ref(null);
@@ -105,6 +109,10 @@ const editDetails = async () => {
 
 const cancelChanges = () => {
   router.go();
+};
+
+const toggleModal = () => {
+  showModal.value = !showModal.value;
 };
 </script>
 
