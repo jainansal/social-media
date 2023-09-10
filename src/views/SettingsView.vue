@@ -1,7 +1,9 @@
 <template>
   <AppLoader :isLoading="isLoading" />
-  <div class="basis-1/2 rounded-3xl flex flex-col h-full">
-    <div class="bg-zinc-800 rounded-3xl gap-4 flex flex-col p-4">
+  <div
+    class="basis-1/2 rounded-3xl flex flex-col h-full gap-4 items-center justify-between"
+  >
+    <div class="bg-zinc-800 rounded-3xl gap-4 flex flex-col p-4 w-full">
       <div class="w-full flex gap-2 items-center">
         <div class="w-16 font-semibold text-lg">Name</div>
         <input
@@ -42,6 +44,11 @@
         />
       </div>
     </div>
+
+    <AppButton
+      text="Permanently delete account"
+      class="rounded bg-red-600 text-center w-1/2"
+    />
   </div>
 </template>
 
