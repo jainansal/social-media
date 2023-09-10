@@ -17,8 +17,11 @@
 
 <script setup>
 import { useRouter } from "vue-router";
-const router = useRouter();
 
+import { useAuthStore } from "@/stores/auth.js";
+
+const authStore = useAuthStore();
+const router = useRouter();
 const emits = defineEmits(["buttonClick"]);
 const props = defineProps({
   details: Object,
@@ -30,7 +33,11 @@ const props = defineProps({
 
 const buttonClick = () => {
   emits("buttonClick");
-  router.push({name: props.details.to});
+  if (props.details.name === "Profile") {
+    router.push({ path: `/profile/${authStore.id}` });
+  } else {
+    router.push({ name: props.details.to });
+  }
 };
 </script>
 

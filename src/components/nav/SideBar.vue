@@ -100,7 +100,7 @@ const buttonClick = (val) => {
 };
 
 const visitProfile = () => {
-  router.push({ name: "profile" });
+  router.push({ path: `/profile/${authStore.id}` });
 };
 
 const logoutUser = async () => {

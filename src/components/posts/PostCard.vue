@@ -91,7 +91,7 @@ const toggleIsLiked = async () => {
 };
 
 const visitProfile = () => {
-  router.push({ name: "profile" });
+  router.push({ path: `/profile/${props.details.author._id}` });
 };
 </script>
 
