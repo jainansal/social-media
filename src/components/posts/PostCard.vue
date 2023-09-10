@@ -1,13 +1,15 @@
 <template>
   <div class="bg-zinc-800 rounded-3xl p-4 flex flex-col gap-4 drop-shadow-md">
-    <div class="flex gap-3 items-center">
+    <div class="flex gap-3 items-center cursor-pointer" @click="visitProfile">
       <img
         :src="details.author.pfp"
         alt="pfp"
         class="w-10 h-10 object-cover rounded-full"
       />
       <div class="flex flex-col">
-        <div class="text-lg font-semibold">{{ details.author.name }}</div>
+        <div class="text-lg font-semibold cursor-pointer" @click="visitProfile">
+          {{ details.author.name }}
+        </div>
         <div class="text-xs">{{ relTime }}</div>
       </div>
     </div>
@@ -47,6 +49,7 @@
 
 <script setup>
 import { computed, ref } from "vue";
+import { useRouter } from "vue-router";
 
 import CommentSection from "../comment/CommentSection.vue";
 
@@ -55,6 +58,7 @@ import { useAuthStore } from "@/stores/auth.js";
 import postServices from "@/services/post.js";
 
 // config
+const router = useRouter();
 const authStore = useAuthStore();
 const props = defineProps({
   details: {
@@ -84,6 +88,10 @@ const toggleIsLiked = async () => {
   } catch (error) {
     console.log("error", error);
   }
+};
+
+const visitProfile = () => {
+  router.push({ name: "profile" });
 };
 </script>
 
