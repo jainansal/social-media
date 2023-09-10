@@ -56,7 +56,9 @@ const getUserFriends = async () => {
 const allUsers = ref([]);
 const getAllUsers = async () => {
   const response = await userServices.getAllUsers();
-  allUsers.value = response;
+  allUsers.value = response.filter(
+    (item) => item._id !== authStore.id && !friends.value.includes(item._id)
+  );
 };
 
 const init = async () => {
