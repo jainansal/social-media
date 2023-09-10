@@ -1,7 +1,5 @@
 <template>
-  <div
-    class="bg-zinc-800 rounded-3xl h-1/4 p-4 flex gap-4 w-full overflow-hidden"
-  >
+  <div class="bg-zinc-800 rounded-3xl h-1/4 p-4 flex gap-4 w-full">
     <img
       :src="userStore.pfp"
       alt="pfp"
