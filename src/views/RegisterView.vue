@@ -6,23 +6,16 @@
       <form class="flex flex-col gap-3" @submit.prevent="handleSubmit">
         <input
           type="text"
-          placeholder="First Name"
+          placeholder="Name"
           class="p-3 text-lg bg-slate-800 focus:outline-none"
-          v-model="formData.firstName"
+          v-model="formData.name"
           required
         />
         <input
           type="text"
-          placeholder="Last Name"
+          placeholder="Username"
           class="p-3 text-lg bg-slate-800 focus:outline-none"
-          v-model="formData.lastName"
-          required
-        />
-        <input
-          type="email"
-          placeholder="Email Address"
-          class="p-3 text-lg bg-slate-800 focus:outline-none"
-          v-model="formData.email"
+          v-model="formData.username"
           required
         />
         <input
@@ -61,9 +54,8 @@ const errorMsg = ref("");
 
 // Specific variables
 const formData = reactive({
-  firstName: "",
-  lastName: "",
-  email: "",
+  name: "",
+  username: "",
   password: "",
 });
 
@@ -74,7 +66,7 @@ const handleSubmit = async () => {
     router.push({ name: "home" });
   } catch (error) {
     console.log(error);
-    toast.error("Some error occured");
+    toast.error(error.response.data.message || "Some error occured");
   } finally {
     isLoading.value = false;
   }

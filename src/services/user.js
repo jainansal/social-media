@@ -1,30 +1,27 @@
 import axios from "axios";
-import { useAuthStore } from "@/stores/auth"
 
-const auth = useAuthStore();
+const getAllUsers = async () => {
+  const response = await axios.get('user/all');
+  return response.data;
+}
 
-const getUsersActivity = async () => {
-  const response = await axios.get('user/activity');
+const getBasicDetails = async (id) => {
+  const response = await axios.get(`user/basic/${id}`);
   return response.data
 }
 
-const getProfile = async (id) => {
-  const response = await axios.get(`user/${id}`);
+const getUserPosts = async (id) => {
+  const response = await axios.get(`post/${id}`);
   return response.data
 }
 
-const editProfile = async (data) => {
-  const response = await axios.put(`user/${auth.userId}`, {
-    firstName: data.firstName,
-    lastName: data.lastName,
-    profileImg: data.profileImg
-  })
+const getUserFriends = async (id) => {
+  const response = await axios.get(`user/friends/${id}`);
+  return response.data
 }
 
-const updateFollowing = async (id) => {
-  const response = await axios.put(`user/following`, {
-    newUser: id
-  })
+const getRequestsReceived = async (id) => {
+  const response = await axios.get('friends/received')
   return response.data
 }
 
@@ -34,10 +31,18 @@ const addPost = async (data) => {
   })
 }
 
+const editDetails = async (data) => {
+  await axios.put(`user/basic`, {
+    ...data
+  });
+}
+
 export default {
-  getUsersActivity,
-  getProfile,
-  editProfile,
-  updateFollowing,
-  addPost
+  getAllUsers,
+  getBasicDetails,
+  getUserPosts,
+  getUserFriends,
+  getRequestsReceived,
+  addPost,
+  editDetails
 }

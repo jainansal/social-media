@@ -6,16 +6,28 @@ const getPost = async (id) => {
 }
 
 const getAllPosts = async () => {
-  const response = await axios.get('post');
+  const response = await axios.get('post/all');
   return response.data
 }
 
-const toggleLike = async (id) => {
-  await axios.put(`post/likecomment/${id}`);
+const getTrendingPosts = async () => {
+  const response = await axios.get('post/trending');
+  return response.data
+}
+
+const getFriendsPosts = async () => {
+  const response = await axios.get('post/friends');
+  return response.data
+}
+
+const updateLikes = async (id) => {
+  await axios.put(`post/likes/${id}`);
 }
 
 export default {
-  toggleLike,
+  updateLikes,
   getPost,
-  getAllPosts
+  getAllPosts,
+  getTrendingPosts,
+  getFriendsPosts
 }

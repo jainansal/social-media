@@ -1,31 +1,31 @@
 import axios from "axios"
 
 const login = async (data) => {
-  const response = await axios.post('auth/login', {
-    email: data.email,
-    password: data.password
-  })
-  return response
+  try {
+    await axios.post('auth/login', {
+      username: data.username,
+      password: data.password
+    })
+  } catch (error) {
+    throw error
+  }
 }
 
 const init = async () => {
   try {
     const response = await axios.get('auth/init')
-    return response
-  } catch (err) {
-    console.log(err)
-    throw err
+    return response.data
+  } catch (error) {
+    throw error
   }
 }
 
 const register = async (data) => {
-  const response = await axios.post('auth/register', {
-    email: data.email,
-    firstName: data.firstName,
-    lastName: data.lastName,
+  await axios.post('auth/register', {
+    name: data.name,
+    username: data.username,
     password: data.password
   })
-  return response
 }
 
 const logout = async () => {

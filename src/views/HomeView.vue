@@ -1,53 +1,101 @@
 <template>
   <AppLoader :isLoading="isLoading" />
-  <div class="h-screen w-screen flex flex-col">
-    <AppNavbar />
-    <div class="h-full flex overflow-hidden">
-      <FriendsActivityIndex />
-      <PostSection :posts="posts" :withDetails="true" />
-      <NewsSection />
+  <div class="basis-1/2 flex flex-col gap-4 overlay rounded-3xl">
+    <NewPost />
+    <div class="w-full rounded-3xl flex flex-row">
+      <div
+        class="basis-1/3 flex justify-center items-center p-2 rounded-2xl cursor-pointer text-lg hover:font-semibold"
+        :class="{
+          'font-semibold bg-violet-800': activeQuery === 'all',
+        }"
+        @click="setActiveQuery('all')"
+      >
+        All
+      </div>
+      <div
+        class="basis-1/3 flex justify-center items-center p-2 rounded-2xl cursor-pointer text-lg hover:font-semibold"
+        :class="{
+          'font-semibold bg-violet-800': activeQuery === 'trending',
+        }"
+        @click="setActiveQuery('trending')"
+      >
+        Trending
+      </div>
+      <div
+        class="basis-1/3 flex justify-center items-center p-2 rounded-2xl cursor-pointer text-lg hover:font-semibold"
+        :class="{
+          'font-semibold bg-violet-800': activeQuery === 'friends',
+        }"
+        @click="setActiveQuery('friends')"
+      >
+        Friends
+      </div>
     </div>
+    <PostCard v-for="(post, index) in posts" :key="index" :details="post" />
   </div>
 </template>
 
 <script setup>
 import { ref } from "vue";
-import { useToast } from "vue-toastification";
-import { storeToRefs } from "pinia";
 
-import NewPost from "@/components/common/NewPost.vue";
-import PostCard from "@/components/common/PostCard.vue";
 import AppLoader from "@/components/common/AppLoader.vue";
-import AppNavbar from "../components/common/AppNavbar.vue";
-import FriendsActivityIndex from "@/components/friends_activity/Index.vue";
-import PostSection from "@/components/common/PostSection.vue";
-import NewsSection from "../components/common/NewsSection.vue";
-import postServices from "@/services/post";
-import { usePostsStore } from "@/stores/posts";
+import NewPost from "../components/posts/NewPost.vue";
+import PostCard from "../components/posts/PostCard.vue";
 
-const postsStore = usePostsStore();
-const { posts, init } = storeToRefs(postsStore);
-const { setPosts, setInit } = postsStore;
-const toast = useToast();
+import postServices from "@/services/post.js";
+
+// Config
 const isLoading = ref(false);
 
-const getPosts = async () => {
-  try {
-    console.log("...fetching posts...");
-    isLoading.value = true;
-    const response = await postServices.getAllPosts();
-    setPosts(response);
-  } catch (err) {
-    toast.error(err.data);
-    console.log(err);
-  } finally {
-    isLoading.value = false;
-    setInit();
+// Main
+const activeQuery = ref("all");
+const setActiveQuery = (val) => {
+  activeQuery.value = val;
+  init();
+};
+
+const posts = ref([]);
+const init = async () => {
+  if (activeQuery.value === "all") {
+    console.log("all");
+    try {
+      isLoading.value = true;
+      const response = await postServices.getAllPosts();
+      posts.value = response;
+    } catch (error) {
+      console.log("Error", error);
+    } finally {
+      isLoading.value = false;
+    }
+  }
+
+  if (activeQuery.value === "trending") {
+    console.log("trending");
+    try {
+      isLoading.value = true;
+      const response = await postServices.getTrendingPosts();
+      posts.value = response;
+    } catch (error) {
+      console.log("Error", error);
+    } finally {
+      isLoading.value = false;
+    }
+  }
+
+  if (activeQuery.value === "friends") {
+    console.log("friends");
+    try {
+      isLoading.value = true;
+      const response = await postServices.getFriendsPosts();
+      posts.value = response;
+    } catch (error) {
+      console.log("Error", error);
+    } finally {
+      isLoading.value = false;
+    }
   }
 };
-if (!init.value) {
-  getPosts();
-}
+init();
 </script>
 
 <style lang="scss" scoped>

@@ -5,10 +5,10 @@
       <h1 class="font-semibold text-4xl">SOCIALS</h1>
       <form class="flex flex-col gap-3" @submit.prevent="handleSubmit">
         <input
-          type="email"
-          placeholder="Email Address"
+          type="text"
+          placeholder="Username"
           class="p-3 text-lg bg-slate-800 focus:outline-none"
-          v-model="formData.email"
+          v-model="formData.username"
           required
         />
         <input
@@ -19,9 +19,7 @@
           required
         />
         <div class="flex justify-between items-center mt-5">
-          <p class="cursor-pointer" @click="linkTo('register')">
-            Create account
-          </p>
+          <p class="cursor-pointer" @click="link('register')">Create account</p>
           <button class="p-2 bg-violet-800 cursor-pointer">Login</button>
         </div>
       </form>
@@ -49,7 +47,7 @@ const errorMsg = ref("");
 
 // Specific variables
 const formData = reactive({
-  email: "",
+  username: "",
   password: "",
 });
 
@@ -57,7 +55,7 @@ const handleSubmit = async () => {
   try {
     isLoading.value = true;
     await authServices.login(formData);
-    router.push({ name: "home" });
+    router.go();
   } catch (error) {
     toast.error("Some error occured");
   } finally {
@@ -65,7 +63,7 @@ const handleSubmit = async () => {
   }
 };
 
-const linkTo = (path) => {
+const link = (path) => {
   router.push({ name: path });
 };
 </script>

@@ -2,20 +2,47 @@ import { defineStore } from "pinia";
 import { ref } from "vue";
 
 export const usePostsStore = defineStore('posts', () => {
-  const init = ref(false);
-  const posts = ref([]);
-
-  const setInit = () => {
-    init.value = true;
+  const initAll = ref(false);
+  const setInitAll = () => {
+    initAll.value = true;
   }
-  const setPosts = (value) => {
-    posts.value = value;
+
+  const allPosts = ref([]);
+  const setAllPosts = (value) => {
+    allPosts.value = value;
+  }
+
+  const initTrending = ref(false);
+  const setInitTrending = () => {
+    initTrending.value = true;
+  }
+
+  const trendingPosts = ref([]);
+  const setTrendingPosts = (value) => {
+    trendingPosts.value = value;
+  }
+  const initFriends = ref(false);
+  const setInitFriends = () => {
+    initFriends.value = true;
+  }
+
+  const friendsPosts = ref([]);
+  const setFriendsPosts = (value) => {
+    friendsPosts.value = value;
   }
 
   return {
-    init,
-    setInit,
-    posts,
-    setPosts
+    initAll,
+    setInitAll,
+    allPosts,
+    setAllPosts,
+    initTrending,
+    setInitTrending,
+    trendingPosts,
+    setTrendingPosts,
+    initFriends,
+    setInitFriends,
+    friendsPosts,
+    setFriendsPosts,
   }
 })

@@ -1,31 +1,43 @@
 import { createWebHistory, createRouter } from "vue-router";
 import { useToast } from "vue-toastification";
+const toast = useToast();
 
 import { useAuthStore } from "../stores/auth";
-import { useUserStore } from "../stores/user";
-import authServices from "@/services/auth"
-
-const toast = useToast()
+import authServices from "@/services/auth";
+import DefaultLayout from "@/layouts/DefaultLayout.vue";
 
 const routes = [
   {
-    path: "/",
-    name: "home",
-    component: () => import('@/views/HomeView.vue'),
-  },
-  {
-    path: '/home',
-    redirect: '/'
-  },
-  {
-    path: '/profile/:id',
-    name: 'user-profile',
-    component: () => import('@/views/ProfileView.vue')
-  },
-  {
-    path: '/profile',
-    name: 'profile',
-    component: () => import('@/views/ProfileView.vue')
+    path: '/',
+    redirect: '/home',
+    component: DefaultLayout,
+    children: [
+      {
+        path: 'home',
+        name: 'home',
+        component: () => import('@/views/HomeView.vue')
+      },
+      {
+        path: 'friends',
+        name: 'friends',
+        component: () => import('@/views/FriendsView.vue')
+      },
+      {
+        path: 'requests',
+        name: 'requests',
+        component: () => import('@/views/RequestsView.vue')
+      },
+      {
+        path: 'profile',
+        name: 'profile',
+        component: () => import('@/views/ProfileView.vue')
+      },
+      {
+        path: 'settings',
+        name: 'settings',
+        component: () => import('@/views/SettingsView.vue')
+      }
+    ]
   },
   {
     path: '/login',
@@ -36,8 +48,8 @@ const routes = [
     path: '/register',
     name: 'register',
     component: () => import('@/views/RegisterView.vue')
-  },
-];
+  }
+]
 
 const router = createRouter({
   history: createWebHistory(),
@@ -45,26 +57,18 @@ const router = createRouter({
 });
 
 router.beforeEach(async (to, from, next) => {
-  const publicPages = ['/login', '/register']
-  const authRequired = !publicPages.includes(to.path)
-  const auth = useAuthStore()
-  const user = useUserStore()
+  const publicPages = ['login', 'register']
+  const authRequired = !publicPages.includes(to.name)
+  const authStore = useAuthStore();
 
-  if (!auth.loggedIn) {
+  if (!authStore.init) {
+    authStore.setInit();
     try {
-      const data = await authServices.init()
-      // console.log('data',data.data)
-      auth.setLoggedIn(true)
-      auth.setUserId(data.data._id)
-      user.setFirstName(data.data.firstName)
-      user.setLastName(data.data.lastName)
-      user.setEmail(data.data.email)
-      user.setProfileImg(data.data.profileImg)
-      user.setPosts(data.data.posts)
-      user.setFollowing(data.data.following)
-      console.log(user.$state)
-    } catch (err) {
-      console.log(err)
+      const response = await authServices.init();
+      authStore.setID(response.id);
+    } catch (error) {
+      console.log(error)
+      toast.error(error.response.data.message || "Some error occured");
       if (authRequired) {
         next('/login')
       } else {
@@ -73,7 +77,7 @@ router.beforeEach(async (to, from, next) => {
     }
   }
 
-  if (to.name === 'login' || to.name === 'register' && auth.loggedIn) {
+  if ((to.name === 'login' || to.name === 'register') && authStore.id) {
     next('/')
   } else {
     next()

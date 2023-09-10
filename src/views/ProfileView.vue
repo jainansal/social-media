@@ -1,64 +1,62 @@
 <template>
   <AppLoader :isLoading="isLoading" />
-  <div class="h-screen w-screen flex flex-col">
-    <AppNavbar />
-    <div class="h-full flex overflow-hidden">
-      <ProfileCard :details="profile" />
-      <PostSection :posts="posts" />
-      <FollowingCard :users="following" />
+  <div class="basis-1/2 rounded-3xl flex flex-col h-full gap-4 overlay">
+    <ProfileHeader />
+    <ProfileMid :friends="userFriends" :posts="userPosts.length" />
+    <div class="h-full gap-4 flex flex-col">
+      <PostCard
+        v-for="(post, index) in userPosts"
+        :key="index"
+        :details="post"
+      />
     </div>
   </div>
 </template>
 
 <script setup>
-import { reactive, ref } from "vue";
-import { storeToRefs } from "pinia";
-import { useRoute } from "vue-router";
+import { ref } from "vue";
 
 import AppLoader from "@/components/common/AppLoader.vue";
-import AppNavbar from "../components/common/AppNavbar.vue";
-import ProfileCard from "../components/profile/ProfileCard.vue";
-import LabelSection from "@/components/common/LabelSection.vue";
-import FollowingCard from "@/components/profile/FollowingCard.vue";
-import NewPost from "../components/common/NewPost.vue";
-import PostCard from "../components/common/PostCard.vue";
-import PostSection from "@/components/common/PostSection.vue";
-import userServices from "@/services/user";
-import { useAuthStore } from "@/stores/auth";
+import ProfileHeader from "../components/profile/ProfileHeader.vue";
+import ProfileMid from "../components/profile/ProfileMid.vue";
+import PostCard from "@/components/posts/PostCard.vue";
 
-const route = useRoute();
-const auth = useAuthStore();
+import userServices from "@/services/user.js";
+import { useAuthStore } from "@/stores/auth.js";
+
+// config
+const authStore = useAuthStore();
 const isLoading = ref(false);
 
-let { id } = route.params;
-if (!id) id = auth.userId;
+const userPosts = ref([]);
+const userFriends = ref([]);
 
-const profile = reactive({
-  userId: id,
-  fullName: "",
-  email: "",
-  profileImg: "",
-});
-const posts = ref([]);
-const following = ref([]);
-
-const getUserData = async () => {
+const getUserPosts = async () => {
   try {
-    isLoading.value = true;
-    const response = await userServices.getProfile(id);
-    profile.fullName = response.firstName + " " + response.lastName;
-    profile.email = response.email;
-    profile.profileImg = response.profileImg;
-    posts.value = response.posts;
-    following.value = response.following;
-    console.log(following.value);
+    const response = await userServices.getUserPosts(authStore.id);
+    userPosts.value = response;
   } catch (err) {
-    console.log("Error fetching user data", err);
-  } finally {
-    isLoading.value = false;
+    console.log("Error", err);
   }
 };
-getUserData();
+
+const getUserFriends = async () => {
+  try {
+    const response = await userServices.getUserFriends(authStore.id);
+    userFriends.value = response;
+  } catch (err) {
+    console.log("Error", err);
+  }
+};
+
+const getDetails = async () => {
+  isLoading.value = true;
+  await getUserPosts();
+  await getUserFriends();
+  isLoading.value = false;
+};
+
+getDetails();
 </script>
 
 <style lang="scss" scoped>

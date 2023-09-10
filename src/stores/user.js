@@ -1,53 +1,56 @@
 import { defineStore } from "pinia";
-import { computed, ref } from "vue";
+import { ref } from "vue";
 
 export const useUserStore = defineStore('user', () => {
-  const profileImg = ref('https://www.mintface.xyz/content/images/2021/08/QmTndiF423kjdXsNzsip1QQkBQqDuzDhJnGuJAXtv4XXiZ-1.png');
-  const firstName = ref('')
-  const lastName = ref('')
-  const email = ref('')
-  const fullName = computed(() => firstName.value + ' ' + lastName.value)
-  const posts = ref([])
-  const following = ref([])
+  const id = ref('');
+  const setID = (value) => {
+    id.value = value
+  }
 
-  const setFirstName = (value) => {
-    firstName.value = value
+  const name = ref('');
+  const setName = (value) => {
+    name.value = value
   }
-  const setLastName = (value) => {
-    lastName.value = value
+
+  const username = ref('');
+  const setUsername = (value) => {
+    username.value = value
   }
-  const setEmail = (value) => {
-    email.value = value
+
+  const pfp = ref('');
+  const setPfp = (value) => {
+    pfp.value = value
   }
-  const setProfileImg = (value) => {
-    profileImg.value = value
+
+  const bio = ref('');
+  const setBio = (value) => {
+    bio.value = value
   }
+
+  const posts = ref([]);
   const setPosts = (value) => {
-    posts.value = value
+    posts.value = value;
   }
-  const setFollowing = (value) => {
-    following.value = value;
-  }
-  const reset = () => {
-    firstName.value = ''
-    lastName.value = ''
-    email.value = ''
+
+  const hasRequests = ref(false);
+  const setHasRequests = () => {
+    hasRequests.value = true;
   }
 
   return {
-    profileImg,
-    firstName,
-    lastName,
-    email,
-    fullName,
+    id,
+    setID,
+    name,
+    setName,
+    username,
+    setUsername,
+    pfp,
+    setPfp,
+    bio,
+    setBio,
     posts,
-    following,
-    setFirstName,
-    setLastName,
-    setEmail,
-    setProfileImg,
     setPosts,
-    setFollowing,
-    reset
+    hasRequests,
+    setHasRequests
   }
 })
