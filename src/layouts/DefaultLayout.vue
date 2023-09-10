@@ -2,7 +2,7 @@
   <div class="h-screen w-screen flex p-4 gap-4 bg-zinc-900 text-zinc-300 overflow-hidden">
     <SideBar />
     <RouterView />
-    <ChatSection />
+    <!-- <ChatSection /> -->
   </div>
 </template>
 

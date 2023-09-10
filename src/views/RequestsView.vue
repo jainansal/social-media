@@ -1,7 +1,7 @@
 <template>
   <div
     v-if="requests.length"
-    class="basis-1/2 grid grid-cols-4 gap-4 overlay h-full rounded-3xl"
+    class="basis-3/4 grid grid-cols-4 gap-4 overlay h-full rounded-3xl"
   >
     <FriendCard 
       v-for="(user,index) in requests"
@@ -10,7 +10,7 @@
       :isRequestCard="true"
     />
   </div>
-  <div v-else class="basis-1/2 rounded-3xl text-3xl flex justify-center items-center">
+  <div v-else class="basis-3/4 rounded-3xl text-3xl flex justify-center items-center">
     You have no requests at the moment, come back later.
   </div>
 </template>

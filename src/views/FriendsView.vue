@@ -1,6 +1,6 @@
 <template>
   <AppLoader :isLoading="isLoading" />
-  <div class="basis-1/2 rounded-3xl flex flex-col gap-4">
+  <div class="basis-3/4 rounded-3xl flex flex-col gap-4">
     <FriendsInput />
     <div
       v-if="friends.length"

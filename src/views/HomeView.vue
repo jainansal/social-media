@@ -1,6 +1,6 @@
 <template>
   <AppLoader :isLoading="isLoading" />
-  <div class="basis-1/2 flex flex-col gap-4 overlay rounded-3xl">
+  <div class="basis-3/4 flex flex-col gap-4 overlay rounded-3xl">
     <NewPost />
     <div class="w-full rounded-3xl flex flex-row">
       <div

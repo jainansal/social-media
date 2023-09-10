@@ -1,6 +1,6 @@
 <template>
   <AppLoader :isLoading="isLoading" />
-  <div class="basis-1/2 rounded-3xl flex flex-col h-full gap-4 overlay">
+  <div class="basis-3/4 rounded-3xl flex flex-col h-full gap-4 overlay">
     <ProfileHeader :details="basicDetails" />
     <ProfileMid :friends="userFriends" :posts="userPosts.length" />
     <div class="h-full gap-4 flex flex-col">
