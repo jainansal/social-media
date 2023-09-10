@@ -35,7 +35,11 @@
           class="bg-violet-400 text-violet-950 rounded"
           @click="editDetails"
         />
-        <AppButton text="Discard" class="bg-zinc-700 rounded" />
+        <AppButton
+          text="Discard"
+          class="bg-zinc-700 rounded"
+          @click="cancelChanges"
+        />
       </div>
     </div>
   </div>
@@ -90,6 +94,10 @@ const editDetails = async () => {
     isLoading.value = false;
     router.go();
   }
+};
+
+const cancelChanges = () => {
+  router.go();
 };
 </script>
 
