@@ -43,7 +43,11 @@
         ></i>
       </div>
     </div>
-    <CommentSection v-if="showComments" />
+    <CommentSection
+      v-if="showComments"
+      :comments="comments"
+      :postId="details._id"
+    />
   </div>
 </template>
 
@@ -71,8 +75,21 @@ const relTime = computed(() => util.timeFromNow(props.details.createdAt));
 const isLiked = ref(props.details.likes.includes(authStore.id));
 const likeCount = ref(props.details.likeCount);
 
+const comments = ref("NaN");
+const getComments = async () => {
+  try {
+    const response = await postServices.getComments(props.details._id);
+    comments.value = response.comments;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 const showComments = ref(false);
-const toggleShowComments = () => {
+const toggleShowComments = async () => {
+  if (comments.value === "NaN") {
+    await getComments();
+  }
   showComments.value = !showComments.value;
 };
 
