@@ -32,9 +32,14 @@ const logout = async () => {
   await axios.post('auth/logout')
 }
 
+const deactivate = async () => {
+  await axios.delete(`auth`);
+}
+
 export default {
   init,
   login,
   register,
-  logout
+  logout,
+  deactivate
 }

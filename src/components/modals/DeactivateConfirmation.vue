@@ -15,9 +15,7 @@
       From: "opacity-100"
       To: "opacity-0"
   -->
-    <div
-      class="fixed inset-0 bg-zinc-900 bg-opacity-[.85] transition-opacity"
-    ></div>
+    <div class="fixed inset-0 bg-zinc-900 bg-opacity-[0.9] deactivating"></div>
 
     <div class="fixed inset-0 z-10 w-screen overflow-y-auto">
       <div
@@ -79,6 +77,7 @@
             <button
               type="button"
               class="inline-flex w-full justify-center rounded-md bg-red-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-500 sm:ml-3 sm:w-auto"
+              @click="handleDeactivate"
             >
               Deactivate
             </button>
@@ -97,7 +96,25 @@
 </template>
 
 <script setup>
+import { useRouter } from "vue-router";
+import { ref } from "vue";
+
+import authServices from "@/services/auth.js";
+
 const emits = defineEmits(["toggle"]);
+const router = useRouter();
+const isDeactivating = ref(false);
+
+const handleDeactivate = async () => {
+  try {
+    isDeactivating.value = true;
+    await authServices.deactivate();
+  } catch (error) {
+    console.log(error);
+  } finally {
+    router.go();
+  }
+};
 
 const handleClick = () => {
   emits("toggle");
@@ -105,4 +122,16 @@ const handleClick = () => {
 </script>
 
 <style lang="scss" scoped>
+.deactivating {
+  animation: fade 3s;
+}
+
+@keyframes fade {
+  from {
+    opacity: 0.65;
+  }
+  to {
+    opacity: 0.9;
+  }
+}
 </style>
