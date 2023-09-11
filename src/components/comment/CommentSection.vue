@@ -1,6 +1,8 @@
 <template>
-  <div class="border-t border-zinc-700 p-1 max-h-52 overlay">
-    <div class="flex flex-col-reverse">
+  <div
+    class="border-t border-zinc-700 p-1 max-h-52 flex flex-col overflow-hidden"
+  >
+    <div class="flex flex-col-reverse h-full overlay" ref="commentDisplay">
       <CommentItem
         v-for="(comment, index) in postComments"
         :key="index"
