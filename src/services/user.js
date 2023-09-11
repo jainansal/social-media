@@ -20,13 +20,18 @@ const getUserFriends = async (id) => {
   return response.data
 }
 
-const getRequestsReceived = async (id) => {
+const getRequestsReceived = async () => {
   const response = await axios.get('friends/received')
   return response.data
 }
 
+const getRequestsSent = async () => {
+  const response = await axios.get('friends/sent')
+  return response.data
+}
+
 const addPost = async (data) => {
-  const response = await axios.post(`post`, {
+  await axios.post(`post`, {
     content: data
   })
 }
@@ -43,6 +48,7 @@ export default {
   getUserPosts,
   getUserFriends,
   getRequestsReceived,
+  getRequestsSent,
   addPost,
   editDetails
 }

@@ -79,7 +79,7 @@ const comments = ref("NaN");
 const getComments = async () => {
   try {
     const response = await postServices.getComments(props.details._id);
-    comments.value = response.comments;
+    comments.value = response;
   } catch (error) {
     console.log(error);
   }

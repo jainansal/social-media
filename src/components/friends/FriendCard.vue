@@ -12,11 +12,11 @@
       v-if="!isRequestCard"
       class="w-full p-1 text-center border border-violet-400 rounded-md text-violet-400 cursor-pointer"
       :class="{
-        'bg-violet-400 text-violet-950': !isFriend,
+        'bg-violet-400 text-violet-950': !isSent,
       }"
-      @click="toggleIsFriend"
+      @click="toggleIsSent"
     >
-      {{ isFriend ? "Friends" : "Add as friend" }}
+      {{ isSent ? "Requested" : "Add as friend" }}
     </div>
     <div v-else class="w-full flex gap-2">
       <div
@@ -48,11 +48,15 @@ const props = defineProps({
       name: "Gwen Stacy",
     },
   },
+  isSentCard: {
+    type: Boolean,
+    default: false,
+  },
 });
 
-const isFriend = ref(false);
-const toggleIsFriend = () => {
-  isFriend.value = !isFriend.value;
+const isSent = ref(props.isSentCard);
+const toggleIsSent = () => {
+  isSent.value = !isSent.value;
 };
 </script>
 

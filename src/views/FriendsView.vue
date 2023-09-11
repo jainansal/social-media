@@ -4,7 +4,7 @@
     <FriendsInput />
     <div
       v-if="friends.length"
-      class="grid grid-cols-4 gap-4 overlay h-full rounded-3xl"
+      class="grid grid-cols-6 gap-4 overlay h-full rounded-3xl"
     >
       <FriendCard
         v-for="(friend, index) in friends"
@@ -16,11 +16,13 @@
       You have no friends at the moment, try reaching out to people.
     </div>
     <hr />
-    <div class="grid grid-cols-4 gap-4 overlay h-full rounded-3xl">
+    <div class="grid grid-cols-6 gap-4 overlay h-full rounded-3xl">
       <FriendCard
         v-for="(user, index) in allUsers"
         :key="index"
         :details="user"
+        :isRequestCard="received.includes(user._id)"
+        :isSentCard="sent.includes(user._id)"
       />
     </div>
   </div>
@@ -61,10 +63,32 @@ const getAllUsers = async () => {
   );
 };
 
+const received = ref([]);
+const getRequestsReceived = async () => {
+  try {
+    const response = await userServices.getRequestsReceived();
+    received.value = response;
+  } catch (err) {
+    console.log("Error", err);
+  }
+};
+
+const sent = ref([]);
+const getRequestsSent = async () => {
+  try {
+    const response = await userServices.getRequestsSent();
+    sent.value = response;
+  } catch (err) {
+    console.log("Error", err);
+  }
+};
+
 const init = async () => {
   isLoading.value = true;
   await getUserFriends();
   await getAllUsers();
+  await getRequestsReceived();
+  await getRequestsSent();
   isLoading.value = false;
 };
 init();
