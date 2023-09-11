@@ -21,7 +21,7 @@
         v-for="(user, index) in allUsers"
         :key="index"
         :details="user"
-        :isRequestCard="received.includes(user._id)"
+        :isRequestCard="received.filter((item) => item._id === user._id).length"
         :isSentCard="sent.includes(user._id)"
       />
     </div>
@@ -86,9 +86,9 @@ const getRequestsSent = async () => {
 const init = async () => {
   isLoading.value = true;
   await getUserFriends();
-  await getAllUsers();
   await getRequestsReceived();
   await getRequestsSent();
+  await getAllUsers();
   isLoading.value = false;
 };
 init();

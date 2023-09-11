@@ -36,6 +36,8 @@
 <script setup>
 import { ref } from "vue";
 
+import userServices from "@/services/user.js";
+
 const props = defineProps({
   isRequestCard: {
     type: Boolean,
@@ -55,8 +57,15 @@ const props = defineProps({
 });
 
 const isSent = ref(props.isSentCard);
-const toggleIsSent = () => {
-  isSent.value = !isSent.value;
+const toggleIsSent = async () => {
+  if (!isSent.value) {
+    try {
+      await userServices.sendRequest(props.details._id);
+      isSent.value = true;
+    } catch (error) {
+      console.log(error);
+    }
+  }
 };
 </script>
 

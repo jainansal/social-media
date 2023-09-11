@@ -42,6 +42,10 @@ const editDetails = async (data) => {
   });
 }
 
+const sendRequest = async (id) => {
+  await axios.post(`friends/send/${id}`);
+}
+
 export default {
   getAllUsers,
   getBasicDetails,
@@ -50,5 +54,6 @@ export default {
   getRequestsReceived,
   getRequestsSent,
   addPost,
-  editDetails
+  editDetails,
+  sendRequest
 }

@@ -1,7 +1,7 @@
 <template>
   <div
     v-if="requests.length"
-    class="basis-3/4 grid grid-cols-4 gap-4 overlay h-full rounded-3xl"
+    class="basis-3/4 grid grid-cols-6 gap-4 overlay h-full rounded-3xl"
   >
     <FriendCard 
       v-for="(user,index) in requests"
