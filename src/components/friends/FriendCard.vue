@@ -5,9 +5,12 @@
     <img
       :src="details.pfp"
       alt="pfp"
-      class="w-1/2 aspect-square object-cover rounded-full"
+      class="w-1/2 aspect-square object-cover rounded-full cursor-pointer"
+      @click="visitProfile"
     />
-    <h1 class="font-semibold text-xl pb-1">{{ details.name }}</h1>
+    <h1 class="font-semibold text-xl pb-1 cursor-pointer" @click="visitProfile">
+      {{ details.name }}
+    </h1>
     <div
       v-if="!isRequestCard"
       class="w-full p-1 text-center border border-violet-400 rounded-md text-violet-400 cursor-pointer"
@@ -35,9 +38,11 @@
 
 <script setup>
 import { ref } from "vue";
+import { useRouter } from "vue-router";
 
 import userServices from "@/services/user.js";
 
+const router = useRouter();
 const props = defineProps({
   isRequestCard: {
     type: Boolean,
@@ -66,6 +71,10 @@ const toggleIsSent = async () => {
       console.log(error);
     }
   }
+};
+
+const visitProfile = () => {
+  router.push({ path: `/profile/${props.details._id}` });
 };
 </script>
 
