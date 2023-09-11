@@ -46,6 +46,12 @@ const sendRequest = async (id) => {
   await axios.post(`friends/send/${id}`);
 }
 
+const respondRequest = async (id, modeOfAction) => {
+  await axios.post(`friends/respond/${id}`, {
+    action: modeOfAction
+  })
+}
+
 export default {
   getAllUsers,
   getBasicDetails,
@@ -55,5 +61,6 @@ export default {
   getRequestsSent,
   addPost,
   editDetails,
-  sendRequest
+  sendRequest,
+  respondRequest
 }

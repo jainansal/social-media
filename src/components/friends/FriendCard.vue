@@ -24,11 +24,13 @@
     <div v-else class="w-full flex gap-2">
       <div
         class="w-full p-1 text-center border border-green-500 rounded-md text-green-500 cursor-pointer hover:bg-green-500 hover:text-white"
+        @click="acceptRequest"
       >
         <i class="fa-solid fa-check"></i>
       </div>
       <div
         class="w-full p-1 text-center border border-red-600 rounded-md text-red-600 cursor-pointer hover:bg-red-600 hover:text-white"
+        @click="rejectRequest"
       >
         <i class="fa-solid fa-xmark"></i>
       </div>
@@ -75,6 +77,22 @@ const toggleIsSent = async () => {
 
 const visitProfile = () => {
   router.push({ path: `/profile/${props.details._id}` });
+};
+
+const acceptRequest = async () => {
+  try {
+    await userServices.respondRequest(props.details._id, "accept");
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+const rejectRequest = async () => {
+  try {
+    await userServices.respondRequest(props.details._id, "reject");
+  } catch (error) {
+    console.log(error);
+  }
 };
 </script>
 
