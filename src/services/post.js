@@ -30,9 +30,10 @@ const getComments = async (id) => {
 }
 
 const addComment = async (id, data) => {
-  await axios.post(`post/comments/${id}`, {
+  const response = await axios.post(`post/comments/${id}`, {
     content: data
   })
+  return response.data;
 }
 
 export default {

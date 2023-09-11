@@ -15,14 +15,23 @@
 
 <script setup>
 import { ref } from "vue";
+import { useRouter } from "vue-router";
 
 const emits = defineEmits(["newComment"]);
+const router = useRouter();
 
 const comment = ref("");
 
 const addComment = () => {
   if (comment.value.trim()) {
-    emits("newComment", comment.value.trim());
+    try {
+      emits("newComment", comment.value.trim());
+    } catch (error) {
+      console.log(error);
+      router.go();
+    } finally {
+      comment.value = "";
+    }
   }
 };
 </script>

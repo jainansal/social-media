@@ -1,15 +1,19 @@
 <template>
   <div class="border-t border-zinc-700 p-1 max-h-52 overlay">
-    <CommentItem
-      v-for="(comment, index) in comments"
-      :key="index"
-      :details="comment"
-    />
+    <div class="flex flex-col-reverse">
+      <CommentItem
+        v-for="(comment, index) in postComments"
+        :key="index"
+        :details="comment"
+      />
+    </div>
     <NewComment @newComment="addComment" />
   </div>
 </template>
 
 <script setup>
+import { ref } from "vue";
+
 import CommentItem from "./CommentItem.vue";
 import NewComment from "./NewComment.vue";
 
@@ -20,9 +24,12 @@ const props = defineProps({
   postId: String,
 });
 
+const postComments = ref(props.comments);
+
 const addComment = async (data) => {
   try {
-    await postServices.addComment(props.postId, data);
+    const response = await postServices.addComment(props.postId, data);
+    postComments.value = response;
   } catch (error) {
     console.log(error);
   }

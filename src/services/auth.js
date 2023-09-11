@@ -33,7 +33,8 @@ const logout = async () => {
 }
 
 const deactivate = async () => {
-  await axios.delete(`auth`);
+  console.log('Operation in production')
+  // await axios.delete(`auth`);
 }
 
 export default {
