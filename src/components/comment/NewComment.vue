@@ -9,7 +9,10 @@
       class="bg-inherit focus:outline-none w-full font-light"
       @keypress.enter="addComment"
     />
-    <i class="fa-solid fa-paper-plane text-violet-400 cursor-pointer"></i>
+    <i
+      class="fa-solid fa-paper-plane text-violet-400 cursor-pointer"
+      @click="addComment"
+    ></i>
   </div>
 </template>
 

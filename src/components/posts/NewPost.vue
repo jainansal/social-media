@@ -23,12 +23,14 @@
 <script setup>
 import { ref } from "vue";
 import { useRouter } from "vue-router";
+import { useToast } from "vue-toastification";
 
 import AppLoader from "@/components/common/AppLoader.vue";
 
 import userServices from "@/services/user.js";
 
 // config
+const toast = useToast();
 const isLoading = ref(false);
 const router = useRouter();
 
@@ -38,11 +40,13 @@ const handleSubmit = async () => {
   try {
     isLoading.value = true;
     await userServices.addPost(content.value);
+    toast.success("Post added successfully");
   } catch (err) {
+    toast.error("Some error occured. Check console.");
     console.log("Error", err);
   } finally {
     isLoading.value = false;
-    router.go();
+    setTimeout(() => router.go(), 2000);
   }
 };
 </script>
