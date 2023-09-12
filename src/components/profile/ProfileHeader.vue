@@ -1,9 +1,9 @@
 <template>
-  <div class="bg-zinc-800 rounded-3xl h-1/4 p-4 flex gap-4 w-full">
+  <div class="bg-zinc-800 rounded-3xl h-1/2 p-4 flex flex-col gap-4 w-full lg:flex-row lg:h-1/4">
     <img
       :src="details.pfp"
       alt="pfp"
-      class="h-full aspect-square object-cover rounded-xl"
+      class="aspect-square object-cover rounded-xl h-1/2 lg:h-full"
     />
     <div class="flex flex-col gap-4 w-full overflow-hidden">
       <div class="flex justify-between items-center">

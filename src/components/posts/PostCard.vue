@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-zinc-800 rounded-3xl p-4 flex flex-col gap-4 drop-shadow-md">
+  <div class="bg-zinc-800 rounded-3xl p-3 flex flex-col gap-4 drop-shadow-md lg:p-4">
     <div class="flex gap-3 items-center cursor-pointer" @click="visitProfile">
       <img
         :src="details.author.pfp"

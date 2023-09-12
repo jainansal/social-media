@@ -8,7 +8,7 @@
       required
       placeholder="New post"
       v-model="content"
-      class="w-full h-24 bg-inherit focus:outline-none font-light text-lg"
+      class="w-full h-12 bg-inherit focus:outline-none font-light text-lg lg:h-24"
     ></textarea>
     <div class="flex justify-end">
       <button

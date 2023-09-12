@@ -1,13 +1,13 @@
 <template>
   <div class="flex flex-row gap-4">
     <div
-      class="bg-zinc-800 rounded-3xl p-4 basis-1/2 justify-center items-center flex gap-2"
+      class="bg-zinc-800 rounded-3xl p-2 basis-1/2 justify-center items-center flex gap-2 lg:p-4"
     >
       <span class="font-bold text-3xl text-violet-400">{{ posts }}</span>
       Posts
     </div>
     <div
-      class="bg-zinc-800 rounded-3xl p-4 basis-1/2 justify-center items-center flex gap-2 cursor-pointer"
+      class="bg-zinc-800 rounded-3xl p-2 basis-1/2 justify-center items-center flex gap-2 cursor-pointer lg:p-4"
       @click="showFriendsModal"
     >
       <span class="font-bold text-3xl text-violet-400">{{
