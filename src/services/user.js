@@ -57,6 +57,11 @@ const respondRequest = async (id, modeOfAction) => {
   })
 }
 
+const searchUser = async (data) => {
+  const response = await axios.get(`user/search/${data}`);
+  return response.data;
+}
+
 export default {
   getAllUsers,
   getBasicDetails,
@@ -68,5 +73,6 @@ export default {
   addPost,
   editDetails,
   sendRequest,
-  respondRequest
+  respondRequest,
+  searchUser
 }

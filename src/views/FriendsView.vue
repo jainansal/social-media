@@ -1,7 +1,7 @@
 <template>
   <AppLoader :isLoading="isLoading" />
   <div class="basis-3/4 rounded-3xl flex flex-col gap-4">
-    <FriendsInput />
+    <UserSearch @search="searchUser" />
     <div
       v-if="friends.length"
       class="grid grid-cols-6 gap-4 overlay rounded-3xl"
@@ -34,7 +34,7 @@
 import { ref } from "vue";
 
 import AppLoader from "@/components/common/AppLoader.vue";
-import FriendsInput from "../components/friends/FriendsInput.vue";
+import UserSearch from "../components/friends/UserSearch.vue";
 import FriendCard from "@/components/friends/FriendCard.vue";
 
 import { useAuthStore } from "@/stores/auth.js";
@@ -94,6 +94,15 @@ const init = async () => {
   isLoading.value = false;
 };
 init();
+
+const searchUser = async (data) => {
+  try {
+    const response = await userServices.searchUser(data);
+    allUsers.value = response;
+  } catch (err) {
+    console.log(err);
+  }
+};
 </script>
 
 <style lang="scss" scoped>

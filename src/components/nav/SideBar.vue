@@ -7,19 +7,7 @@
     >
       <h1 class="font-bold text-4xl">SOCIALS</h1>
     </div>
-    <div class="flex items-center justify-center pt-4 h-16">
-      <div
-        class="border flex flex-row items-center p-2 gap-2 rounded-full border-zinc-700 w-3/4"
-      >
-        <i class="fa-solid fa-magnifying-glass"></i>
-        <input
-          type="text"
-          placeholder="Search"
-          class="bg-inherit focus:outline-none w-full"
-        />
-      </div>
-    </div>
-    <div class="h-full py-4 overflow-hidden">
+    <div class="h-full py-4 overlay">
       <div class="grid grid-cols-2 gap-4">
         <NavItem
           v-for="(item, index) in navItems"
