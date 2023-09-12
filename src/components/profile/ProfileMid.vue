@@ -7,7 +7,8 @@
       Posts
     </div>
     <div
-      class="bg-zinc-800 rounded-3xl p-4 basis-1/3 justify-center items-center flex gap-2"
+      class="bg-zinc-800 rounded-3xl p-4 basis-1/3 justify-center items-center flex gap-2 cursor-pointer"
+      @click="showFriendsModal"
     >
       <span class="font-bold text-3xl text-violet-400">{{
         friends.length
@@ -23,10 +24,15 @@
 </template>
 
 <script setup>
+const emits = defineEmits(["openModal"]);
 const props = defineProps({
   friends: Object,
   posts: Number,
 });
+
+const showFriendsModal = () => {
+  emits("openModal");
+};
 </script>
 
 <style lang="scss" scoped>

@@ -1,8 +1,17 @@
 <template>
   <AppLoader :isLoading="isLoading" />
+  <UserFriends
+    v-if="showFriends"
+    :friends="userFriends"
+    @closeModal="toggleFriendsModal"
+  />
   <div class="basis-3/4 rounded-3xl flex flex-col h-full gap-4 overlay">
     <ProfileHeader :details="basicDetails" :advanced="advancedDetails" />
-    <ProfileMid :friends="userFriends" :posts="userPosts.length" />
+    <ProfileMid
+      :friends="userFriends"
+      :posts="userPosts.length"
+      @openModal="toggleFriendsModal"
+    />
     <div class="h-full gap-4 flex flex-col">
       <PostCard
         v-for="(post, index) in userPosts"
@@ -21,6 +30,7 @@ import AppLoader from "@/components/common/AppLoader.vue";
 import ProfileHeader from "../components/profile/ProfileHeader.vue";
 import ProfileMid from "../components/profile/ProfileMid.vue";
 import PostCard from "@/components/posts/PostCard.vue";
+import UserFriends from "../components/modals/UserFriends.vue";
 
 import userServices from "@/services/user.js";
 import { useAuthStore } from "@/stores/auth.js";
@@ -34,6 +44,7 @@ const userPosts = ref([]);
 const userFriends = ref([]);
 const basicDetails = ref({});
 const advancedDetails = ref({});
+const showFriends = ref(false);
 const id = route.params.id || authStore.id;
 
 const getBasicDetails = async () => {
@@ -49,11 +60,10 @@ const getAdvancedDetails = async () => {
   try {
     const response = await userServices.getAdvancedDetails();
     advancedDetails.value = response;
-    console.log(advancedDetails.value)
   } catch (error) {
     console.log("error", error);
   }
-}
+};
 
 const getUserPosts = async () => {
   try {
@@ -83,6 +93,10 @@ const getDetails = async () => {
 };
 
 getDetails();
+
+const toggleFriendsModal = () => {
+  showFriends.value = !showFriends.value;
+};
 </script>
 
 <style lang="scss" scoped>
