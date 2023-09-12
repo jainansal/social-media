@@ -4,25 +4,27 @@
     <FriendsInput />
     <div
       v-if="friends.length"
-      class="grid grid-cols-6 gap-4 overlay h-full rounded-3xl"
+      class="grid grid-cols-6 gap-4 overlay rounded-3xl"
     >
       <FriendCard
         v-for="(friend, index) in friends"
         :key="index"
         :details="friend"
+        :isFriend="true"
       />
     </div>
     <div v-else class="text-xl flex justify-center">
       You have no friends at the moment, try reaching out to people.
     </div>
     <hr />
-    <div class="grid grid-cols-6 gap-4 overlay h-full rounded-3xl">
+    <div class="grid grid-cols-6 gap-4 overlay rounded-3xl">
       <FriendCard
         v-for="(user, index) in allUsers"
         :key="index"
         :details="user"
         :isRequestCard="received.filter((item) => item._id === user._id).length"
         :isSentCard="sent.includes(user._id)"
+        :toSkip="friends.filter((item) => item._id === user._id).length"
       />
     </div>
   </div>

@@ -1,6 +1,7 @@
 <template>
   <div
     class="w-full aspect-square bg-zinc-800 rounded-3xl flex items-center justify-between flex-col p-4"
+    v-if="!toSkip"
   >
     <img
       :src="details.pfp"
@@ -15,11 +16,11 @@
       v-if="!isRequestCard"
       class="w-full p-1 text-center border border-violet-400 rounded-md text-violet-400 cursor-pointer"
       :class="{
-        'bg-violet-400 text-violet-950': !isSent,
+        'bg-violet-400 text-violet-950': !isSent && !isFriend,
       }"
       @click="toggleIsSent"
     >
-      {{ isSent ? "Requested" : "Add as friend" }}
+      {{ isFriend ? "Friends" : isSent ? "Requested" : "Add as friend" }}
     </div>
     <div v-else class="w-full flex gap-2">
       <div
@@ -46,6 +47,14 @@ import userServices from "@/services/user.js";
 
 const router = useRouter();
 const props = defineProps({
+  isFriend: {
+    type: Boolean,
+    default: false,
+  },
+  toSkip: {
+    type: Boolean,
+    default: false,
+  },
   isRequestCard: {
     type: Boolean,
     default: false,
