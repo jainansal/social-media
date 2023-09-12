@@ -3,5 +3,5 @@
 - [ ] Toasters
 - [ ] Unfriend user
 - [ ] Search functionality
-- [ ] Friends' modal in profile view
+- [X] Friends' modal in profile view
 - [ ] Linked accounts
