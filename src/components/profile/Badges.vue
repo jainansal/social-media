@@ -26,7 +26,7 @@
     </div>
   </div>
   <div
-    v-else
+    v-else-if="type === 'none'"
     class="py-1 px-2 border-violet-400 border rounded-md text-violet-950 bg-violet-400 cursor-pointer"
   >
     Add friend

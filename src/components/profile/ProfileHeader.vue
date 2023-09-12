@@ -25,20 +25,24 @@ import { ref } from "vue";
 
 import Badges from "./Badges.vue";
 
+import { useAuthStore } from "@/stores/auth.js";
+
+const authStore = useAuthStore();
 const props = defineProps({
   details: Object,
   advanced: Object,
 });
 
-const type = ref("none");
+const type = ref("my");
 if (props.advanced.friends) {
-  console.log(props.advanced.friends)
   if (props.advanced.friends.includes(props.details._id)) {
     type.value = "friends";
   } else if (props.advanced.sent.includes(props.details._id)) {
     type.value = "sent";
   } else if (props.advanced.received.includes(props.details._id)) {
     type.value = "received";
+  } else if (details._id !== authStore.id) {
+    type.value = "none";
   }
 }
 </script>
