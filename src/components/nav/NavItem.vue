@@ -1,6 +1,6 @@
 <template>
   <div
-    class="justify-center text-xl cursor-pointer flex items-center gap-2 border border-zinc-700 rounded-2xl aspect-square hover:border-violet-500"
+    class="justify-center cursor-pointer flex items-center gap-2 border border-zinc-700 rounded-2xl hover:border-violet-500 p-2 lg:aspect-square lg:text-xl"
     :class="{
       'bg-violet-500 font-semibold text-white': isActive,
     }"

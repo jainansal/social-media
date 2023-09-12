@@ -5,10 +5,10 @@
     <div
       class="flex items-center justify-center pb-2 border-b border-zinc-700 h-12"
     >
-      <h1 class="font-bold text-4xl">SOCIALS</h1>
+      <h1 class="font-bold text-xl lg:text-4xl">SOCIALS</h1>
     </div>
     <div class="h-full py-4 overlay">
-      <div class="grid grid-cols-2 gap-4">
+      <div class="grid grid-cols-1 gap-4 lg:grid-cols-2">
         <NavItem
           v-for="(item, index) in navItems"
           :key="index"
@@ -19,16 +19,16 @@
       </div>
     </div>
     <div
-      class="pt-2 border-t border-zinc-700 flex justify-between items-center"
+      class="pt-2 border-t border-zinc-700 flex items-center lg:justify-between"
     >
       <div class="flex gap-2 items-center">
         <img
           :src="userStore.pfp"
           alt="pfp"
-          class="h-16 w-16 object-cover rounded-md cursor-pointer"
+          class="h-8 w-8 object-cover rounded-md cursor-pointer lg:h-16 lg:w-16"
           @click="visitProfile"
         />
-        <div>
+        <div class="collapse w-0 lg:visible lg:w-auto">
           <div
             class="text-lg font-semibold cursor-pointer hover:text-violet-300"
             @click="visitProfile"
