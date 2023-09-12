@@ -11,7 +11,7 @@
           <div class="font-bold text-2xl">{{ details.name }}</div>
           <div class="font-light text-xl">@{{ details.username }}</div>
         </div>
-        <Badges :type="type" />
+        <Badges :advanced="advanced" :id="details._id" />
       </div>
       <div class="overlay font-light text-lg">
         {{ details.bio }}
@@ -25,26 +25,10 @@ import { ref } from "vue";
 
 import Badges from "./Badges.vue";
 
-import { useAuthStore } from "@/stores/auth.js";
-
-const authStore = useAuthStore();
 const props = defineProps({
   details: Object,
   advanced: Object,
 });
-
-const type = ref("my");
-if (props.advanced.friends) {
-  if (props.advanced.friends.includes(props.details._id)) {
-    type.value = "friends";
-  } else if (props.advanced.sent.includes(props.details._id)) {
-    type.value = "sent";
-  } else if (props.advanced.received.includes(props.details._id)) {
-    type.value = "received";
-  } else if (details._id !== authStore.id) {
-    type.value = "none";
-  }
-}
 </script>
 
 <style lang="scss" scoped>

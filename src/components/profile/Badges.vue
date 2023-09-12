@@ -34,9 +34,28 @@
 </template>
 
 <script setup>
+import { ref } from "vue";
+
+import { useAuthStore } from "@/stores/auth.js";
+
+const authStore = useAuthStore();
 const props = defineProps({
-  type: String,
+  advanced: Object,
+  id: String,
 });
+
+const type = ref("");
+if (props.advanced.friends) {
+  if (props.advanced.friends.includes(props.id)) {
+    type.value = "friends";
+  } else if (props.advanced.sent.includes(props.id)) {
+    type.value = "sent";
+  } else if (props.advanced.received.includes(props.id)) {
+    type.value = "received";
+  } else if (id !== authStore.id) {
+    type.value = "none";
+  }
+}
 </script>
 
 <style lang="scss" scoped>

@@ -1,8 +1,7 @@
-- [ ] skeleton loader
-- [ ] ui/ux update
-- [ ] trending section
-- [ ] following debugging
-- [ ] to use userStore - 2
-- [ ] readme update
-- [X] follow/unfollow basic
-- [X] to use userStore - 1
+- [ ] Infinite loader
+- [ ] Skeleton loader
+- [ ] Toasters
+- [ ] Unfriend user
+- [ ] Search functionality
+- [ ] Friends' modal in profile view
+- [ ] Linked accounts
