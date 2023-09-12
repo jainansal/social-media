@@ -4,7 +4,7 @@
     <UserSearch @search="searchUser" />
     <div
       v-if="friends.length"
-      class="grid grid-cols-6 gap-4 overlay rounded-3xl"
+      class="grid grid-cols-1 gap-4 overlay rounded-3xl sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-6"
     >
       <FriendCard
         v-for="(friend, index) in friends"
@@ -17,7 +17,7 @@
       You have no friends at the moment, try reaching out to people.
     </div>
     <hr />
-    <div class="grid grid-cols-6 gap-4 overlay rounded-3xl">
+    <div class="grid grid-cols-1 gap-4 overlay rounded-3xl sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-6">
       <FriendCard
         v-for="(user, index) in allUsers"
         :key="index"
