@@ -2,7 +2,7 @@
 - [ ] Skeleton loader
 - [ ] Toasters
 - [ ] Unfriend user
-- [ ] Search functionality
+- [X] Search functionality
 - [X] Friends' modal in profile view
 - [X] Linked accounts
 - [ ] Responsive
