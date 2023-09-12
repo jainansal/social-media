@@ -4,4 +4,5 @@
 - [ ] Unfriend user
 - [ ] Search functionality
 - [X] Friends' modal in profile view
-- [ ] Linked accounts
+- [X] Linked accounts
+- [ ] Responsive
