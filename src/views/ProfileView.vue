@@ -1,7 +1,7 @@
 <template>
   <AppLoader :isLoading="isLoading" />
   <div class="basis-3/4 rounded-3xl flex flex-col h-full gap-4 overlay">
-    <ProfileHeader :details="basicDetails" />
+    <ProfileHeader :details="basicDetails" :advanced="advancedDetails" />
     <ProfileMid :friends="userFriends" :posts="userPosts.length" />
     <div class="h-full gap-4 flex flex-col">
       <PostCard
@@ -33,6 +33,7 @@ const isLoading = ref(false);
 const userPosts = ref([]);
 const userFriends = ref([]);
 const basicDetails = ref({});
+const advancedDetails = ref({});
 const id = route.params.id || authStore.id;
 
 const getBasicDetails = async () => {
@@ -43,6 +44,16 @@ const getBasicDetails = async () => {
     console.log("error", error);
   }
 };
+
+const getAdvancedDetails = async () => {
+  try {
+    const response = await userServices.getAdvancedDetails();
+    advancedDetails.value = response;
+    console.log(advancedDetails.value)
+  } catch (error) {
+    console.log("error", error);
+  }
+}
 
 const getUserPosts = async () => {
   try {
@@ -65,6 +76,7 @@ const getUserFriends = async () => {
 const getDetails = async () => {
   isLoading.value = true;
   await getBasicDetails();
+  await getAdvancedDetails();
   await getUserPosts();
   await getUserFriends();
   isLoading.value = false;

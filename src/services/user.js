@@ -10,6 +10,11 @@ const getBasicDetails = async (id) => {
   return response.data
 }
 
+const getAdvancedDetails = async () => {
+  const response = await axios.get(`user/advanced`);
+  return response.data
+}
+
 const getUserPosts = async (id) => {
   const response = await axios.get(`post/${id}`);
   return response.data
@@ -55,6 +60,7 @@ const respondRequest = async (id, modeOfAction) => {
 export default {
   getAllUsers,
   getBasicDetails,
+  getAdvancedDetails,
   getUserPosts,
   getUserFriends,
   getRequestsReceived,
