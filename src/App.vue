@@ -11,6 +11,14 @@
   overflow: overlay;
 }
 
+.font-responsive {
+  font-size: clamp(0.5rem, 3vw, 1.25rem);
+}
+
+.font-responsive-md {
+  font-size: clamp(0.75rem, 5vw, 1.5rem);
+}
+
 ::-webkit-scrollbar-track
 {
 	background-color: inherit;

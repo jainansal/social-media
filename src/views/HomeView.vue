@@ -4,7 +4,7 @@
     <NewPost />
     <div class="w-full rounded-3xl flex flex-row">
       <div
-        class="basis-1/3 flex justify-center items-center p-2 rounded-2xl cursor-pointer text-lg hover:font-semibold"
+        class="basis-1/3 flex justify-center items-center p-1 rounded-2xl cursor-pointer font-responsive hover:font-semibold"
         :class="{
           'font-semibold bg-violet-800': activeQuery === 'all',
         }"
@@ -13,7 +13,7 @@
         All
       </div>
       <div
-        class="basis-1/3 flex justify-center items-center p-2 rounded-2xl cursor-pointer text-lg hover:font-semibold"
+        class="basis-1/3 flex justify-center items-center p-1 rounded-2xl cursor-pointer font-responsive hover:font-semibold"
         :class="{
           'font-semibold bg-violet-800': activeQuery === 'trending',
         }"
@@ -22,7 +22,7 @@
         Trending
       </div>
       <div
-        class="basis-1/3 flex justify-center items-center p-2 rounded-2xl cursor-pointer text-lg hover:font-semibold"
+        class="basis-1/3 flex justify-center items-center p-1 rounded-2xl cursor-pointer font-responsive hover:font-semibold"
         :class="{
           'font-semibold bg-violet-800': activeQuery === 'friends',
         }"

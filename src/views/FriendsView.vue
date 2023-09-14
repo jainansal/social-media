@@ -1,10 +1,10 @@
 <template>
   <AppLoader :isLoading="isLoading" />
-  <div class="basis-3/4 rounded-3xl flex flex-col gap-4">
+  <div class="basis-3/4 rounded-3xl flex flex-col gap-4 overlay">
     <UserSearch @search="searchUser" />
     <div
       v-if="friends.length"
-      class="grid grid-cols-1 gap-4 overlay rounded-3xl sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-6"
+      class="grid gap-4 rounded-3xl grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-6"
     >
       <FriendCard
         v-for="(friend, index) in friends"
@@ -17,7 +17,7 @@
       You have no friends at the moment, try reaching out to people.
     </div>
     <hr />
-    <div class="grid grid-cols-1 gap-4 overlay rounded-3xl sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-6">
+    <div class="grid gap-4 rounded-3xl grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-6">
       <FriendCard
         v-for="(user, index) in allUsers"
         :key="index"
@@ -97,10 +97,13 @@ init();
 
 const searchUser = async (data) => {
   try {
+    isLoading.value = true;
     const response = await userServices.searchUser(data);
     allUsers.value = response;
   } catch (err) {
     console.log(err);
+  } finally {
+    isLoading.value = false;
   }
 };
 </script>
