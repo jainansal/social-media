@@ -27,10 +27,15 @@
         <label for="new-pfp" class="w-full h-full">
           <div
             class="border rounded-xl border-zinc-700 p-2 h-full cursor-pointer items-center flex justify-center text-zinc-500 text-lg"
+            :class="{
+              'cursor-not-allowed': uploadLoading,
+            }"
           >
-            Upload Image
+            <ScaleLoader :loading="uploadLoading" color="rgb(167,139,250)" />
+            <span v-if="!uploadLoading">Upload Image</span>
           </div>
           <input
+            :disabled="uploadLoading"
             id="new-pfp"
             hidden
             type="file"
@@ -66,6 +71,7 @@
 <script setup>
 import { reactive, ref } from "vue";
 import { useRouter } from "vue-router";
+import ScaleLoader from "vue-spinner/src/ScaleLoader.vue";
 
 import AppButton from "@/components/common/AppButton.vue";
 import AppLoader from "@/components/common/AppLoader.vue";
@@ -76,6 +82,7 @@ import userServices from "@/services/user.js";
 import cloudinaryServices from "@/services/cloudinary.js";
 
 // config
+const uploadLoading = ref(false);
 const isLoading = ref(false);
 const authStore = useAuthStore();
 const router = useRouter();
@@ -129,12 +136,14 @@ const toggleModal = () => {
 const handleFileChange = async () => {
   const file = newPfp.value.files[0];
   if (file) {
+    uploadLoading.value = true;
     const { link, err } = await cloudinaryServices.uploadImage(file);
     if (err) {
       console.log(err);
     } else {
       pfp.value = link;
     }
+    uploadLoading.value = false;
   }
 };
 </script>
