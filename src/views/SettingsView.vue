@@ -25,10 +25,11 @@
       <div class="w-full flex gap-2 items-center">
         <div class="text-lg font-semibold">Profile Picture</div>
         <input
-          required
-          type="text"
-          class="bg-inherit p-2 w-full border rounded-xl border-zinc-700 focus:outline-none"
-          v-model="pfp"
+          class="w-full"
+          type="file"
+          accept="image/jpeg, image/png, image/jpg"
+          ref="newPfp"
+          @change="handleFileChange"
         />
         <img :src="pfp" class="w-20 aspect-square object-cover rounded-xl" />
       </div>
@@ -64,6 +65,7 @@ import DeactivateConfirmation from "../components/modals/DeactivateConfirmation.
 
 import { useAuthStore } from "@/stores/auth.js";
 import userServices from "@/services/user.js";
+import cloudinaryServices from "@/services/cloudinary.js";
 
 // config
 const isLoading = ref(false);
@@ -71,6 +73,7 @@ const authStore = useAuthStore();
 const router = useRouter();
 const showModal = ref(false);
 
+const newPfp = ref(null);
 const details = ref({});
 const name = ref(null);
 const bio = ref(null);
@@ -114,7 +117,18 @@ const cancelChanges = () => {
 const toggleModal = () => {
   showModal.value = !showModal.value;
 };
+
+const handleFileChange = async () => {
+  const file = newPfp.value.files[0];
+  if (file) {
+    const { link, err } = await cloudinaryServices.uploadImage(file);
+    if (err) {
+      console.log(err);
+    } else {
+      pfp.value = link;
+    }
+  }
+};
 </script>
 
-<style lang="scss" scoped>
-</style>
+<style lang="scss" scoped></style>
