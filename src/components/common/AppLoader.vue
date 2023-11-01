@@ -1,10 +1,12 @@
 <template>
-  <div class="app-loader" v-if="isLoading">
-    <div class="loader"></div>
+  <div class="app-loader flex justify-center items-center" v-if="isLoading">
+    <GridLoader color="rgb(167,139,250)" />
   </div>
 </template>
 
 <script setup>
+import GridLoader from "vue-spinner/src/GridLoader.vue";
+
 const props = defineProps({
   isLoading: {
     type: Boolean,
@@ -22,36 +24,5 @@ const props = defineProps({
   position: absolute;
   top: 0;
   left: 0;
-
-  .loader {
-    display: inline-block;
-    width: 64px;
-    height: 64px;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translateX(-50%) translateY(-50%);
-
-    &::after {
-      content: " ";
-      display: block;
-      width: 40px;
-      height: 40px;
-      margin: 8px;
-      border-radius: 50%;
-      border: 6px solid #fff;
-      border-color: #2e2e2e transparent #2e2e2e transparent;
-      animation: loader 0.7s linear infinite;
-    }
-  }
-}
-
-@keyframes loader {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
 }
 </style>
