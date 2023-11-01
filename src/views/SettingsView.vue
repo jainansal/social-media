@@ -24,13 +24,21 @@
       </div>
       <div class="w-full flex gap-2 items-center">
         <div class="text-lg font-semibold">Profile Picture</div>
-        <input
-          class="w-full"
-          type="file"
-          accept="image/jpeg, image/png, image/jpg"
-          ref="newPfp"
-          @change="handleFileChange"
-        />
+        <label for="new-pfp" class="w-full h-full">
+          <div
+            class="border rounded-xl border-zinc-700 p-2 h-full cursor-pointer items-center flex justify-center text-zinc-500 text-lg"
+          >
+            Upload Image
+          </div>
+          <input
+            id="new-pfp"
+            hidden
+            type="file"
+            accept="image/jpeg, image/png, image/jpg"
+            ref="newPfp"
+            @change="handleFileChange"
+          />
+        </label>
         <img :src="pfp" class="w-20 aspect-square object-cover rounded-xl" />
       </div>
       <div class="w-full flex gap-2 justify-end">
