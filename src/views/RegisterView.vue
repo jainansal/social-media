@@ -1,27 +1,27 @@
 <template>
   <AppLoader :isLoading="isLoading" />
   <div class="w-screen h-screen flex items-center justify-center">
-    <div class="bg-slate-700 flex flex-col items-center p-16 gap-12">
+    <div class="bg-slate-700 flex flex-col items-center p-16 gap-12 rounded-xl">
       <h1 class="font-semibold text-4xl">SOCIALS</h1>
       <form class="flex flex-col gap-3" @submit.prevent="handleSubmit">
         <input
           type="text"
           placeholder="Name"
-          class="p-3 text-lg bg-slate-800 focus:outline-none"
+          class="p-3 text-lg bg-slate-800 focus:outline-none rounded-md"
           v-model="formData.name"
           required
         />
         <input
           type="text"
           placeholder="Username"
-          class="p-3 text-lg bg-slate-800 focus:outline-none"
+          class="p-3 text-lg bg-slate-800 focus:outline-none rounded-md"
           v-model="formData.username"
           required
         />
         <input
           type="password"
           placeholder="Password"
-          class="p-3 text-lg bg-slate-800 focus:outline-none"
+          class="p-3 text-lg bg-slate-800 focus:outline-none rounded-md"
           v-model="formData.password"
           required
         />
