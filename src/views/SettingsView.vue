@@ -5,7 +5,7 @@
     class="basis-3/4 rounded-3xl flex flex-col h-full gap-4 items-center justify-between"
   >
     <div class="bg-zinc-800 rounded-3xl gap-4 flex flex-col w-full p-4">
-      <div class="flex gap-4 w-full relative">
+      <div class="flex gap-4 w-full relative flex-col sm:flex-row">
         <label for="new-pfp">
           <img
             :src="pfp"
