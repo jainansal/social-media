@@ -31,7 +31,12 @@
         Friends
       </div>
     </div>
-    <PostCard v-for="(post, index) in posts" :key="index" :details="post" />
+    <PostCard v-for="post in posts" :key="post._id" :details="post" />
+    <div
+      class="rounded-2xl p-2 flex justify-center border mb-2 cursor-pointer border-zinc-700 hover:border-violet-500 hover:bg-violet-500"
+    >
+      Show more
+    </div>
   </div>
 </template>
 
@@ -98,5 +103,4 @@ const init = async () => {
 init();
 </script>
 
-<style lang="scss" scoped>
-</style>
+<style lang="scss" scoped></style>

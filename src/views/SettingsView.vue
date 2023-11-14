@@ -4,36 +4,18 @@
   <div
     class="basis-3/4 rounded-3xl flex flex-col h-full gap-4 items-center justify-between"
   >
-    <div class="bg-zinc-800 rounded-3xl gap-4 flex flex-col p-4 w-full">
-      <div class="w-full flex gap-2 items-center">
-        <div class="w-16 font-semibold text-lg">Name</div>
-        <input
-          required
-          v-model="name"
-          type="text"
-          class="bg-inherit w-full p-2 border rounded-xl border-zinc-700 focus:outline-none"
-        />
-      </div>
-      <div class="w-full flex gap-2 items-center">
-        <div class="w-16 font-semibold text-lg">Bio</div>
-        <textarea
-          required
-          v-model="bio"
-          class="w-full bg-inherit p-2 rounded-xl border border-zinc-700 focus:outline-none"
-        ></textarea>
-      </div>
-      <div class="w-full flex gap-2 items-center">
-        <div class="text-lg font-semibold">Profile Picture</div>
-        <label for="new-pfp" class="w-full h-full">
-          <div
-            class="border rounded-xl border-zinc-700 p-2 h-full cursor-pointer items-center flex justify-center text-zinc-500 text-lg"
-            :class="{
-              'cursor-not-allowed': uploadLoading,
-            }"
-          >
-            <ScaleLoader :loading="uploadLoading" color="rgb(167,139,250)" />
-            <span v-if="!uploadLoading">Upload Image</span>
-          </div>
+    <div class="bg-zinc-800 rounded-3xl gap-4 flex flex-col w-full p-4">
+      <div class="flex gap-4 w-full relative">
+        <label for="new-pfp">
+          <img
+            :src="pfp"
+            class="w-40 aspect-square object-cover rounded-xl cursor-pointer"
+          />
+          <ScaleLoader
+            :loading="uploadLoading"
+            color="rgb(167,139,250)"
+            class="absolute top-2 left-2"
+          />
           <input
             :disabled="uploadLoading"
             id="new-pfp"
@@ -43,8 +25,32 @@
             ref="newPfp"
             @change="handleFileChange"
           />
+          <div
+            class="w-full border flex justify-center p-1 mt-2 rounded-lg cursor-pointer border-zinc-700 hover:border-violet-500 hover:bg-violet-500"
+          >
+            Upload
+          </div>
         </label>
-        <img :src="pfp" class="w-20 aspect-square object-cover rounded-xl" />
+
+        <div class="flex flex-col gap-4 w-full">
+          <div class="w-full flex gap-2 items-center">
+            <div class="w-16 font-semibold text-lg">Name</div>
+            <input
+              required
+              v-model="name"
+              type="text"
+              class="bg-inherit w-full p-2 border rounded-xl border-zinc-700 focus:outline-none"
+            />
+          </div>
+          <div class="w-full h-full flex gap-2 items-center">
+            <div class="w-16 font-semibold text-lg">Bio</div>
+            <textarea
+              required
+              v-model="bio"
+              class="w-full h-full bg-inherit p-2 rounded-xl border border-zinc-700 focus:outline-none"
+            ></textarea>
+          </div>
+        </div>
       </div>
       <div class="w-full flex gap-2 justify-end">
         <AppButton
