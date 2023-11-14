@@ -32,9 +32,9 @@ export const useUserStore = defineStore('user', () => {
     posts.value = value;
   }
 
-  const hasRequests = ref(false);
-  const setHasRequests = () => {
-    hasRequests.value = true;
+  const requests = ref([]);
+  const setRequests = (val) => {
+    requests.value = val;
   }
 
   return {
@@ -50,7 +50,7 @@ export const useUserStore = defineStore('user', () => {
     setBio,
     posts,
     setPosts,
-    hasRequests,
-    setHasRequests
+    requests,
+    setRequests
   }
 })

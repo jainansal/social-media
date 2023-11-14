@@ -8,6 +8,10 @@
   >
     <i class="fa-solid" :class="details.icon"></i>
     {{ details.name }}
+    <div
+      class="h-2 w-2 rounded-full bg-violet-400"
+      v-if="details.name === 'Requests' && userStore.requests.length"
+    ></div>
   </div>
 </template>
 
@@ -15,8 +19,10 @@
 import { useRouter } from "vue-router";
 
 import { useAuthStore } from "@/stores/auth.js";
+import { useUserStore } from "@/stores/user.js";
 
 const authStore = useAuthStore();
+const userStore = useUserStore();
 const router = useRouter();
 const emits = defineEmits(["buttonClick"]);
 const props = defineProps({
@@ -37,5 +43,4 @@ const buttonClick = () => {
 };
 </script>
 
-<style lang="scss" scoped>
-</style>
+<style lang="scss" scoped></style>

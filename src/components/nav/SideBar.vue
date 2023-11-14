@@ -79,7 +79,16 @@ if (!userStore.id) {
       console.log("error", error);
     }
   };
+  const getRequests = async () => {
+    try {
+      const response = await userServices.getRequestsReceived();
+      userStore.setRequests(response);
+    } catch (error) {
+      console.log("error", error);
+    }
+  };
   getDetails();
+  getRequests();
 }
 
 const activeIndex = ref(route.name);
@@ -102,5 +111,4 @@ const logoutUser = async () => {
 };
 </script>
 
-<style lang="scss" scoped>
-</style>
+<style lang="scss" scoped></style>
