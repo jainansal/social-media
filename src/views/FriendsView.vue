@@ -17,10 +17,12 @@
       You have no friends at the moment, try reaching out to people.
     </div>
     <hr />
-    <div class="grid gap-4 rounded-3xl grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-6">
+    <div
+      class="grid gap-4 rounded-3xl grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-6"
+    >
       <FriendCard
-        v-for="(user, index) in allUsers"
-        :key="index"
+        v-for="user in allUsers"
+        :key="user._id"
         :details="user"
         :isRequestCard="received.filter((item) => item._id === user._id).length"
         :isSentCard="sent.includes(user._id)"
@@ -108,5 +110,4 @@ const searchUser = async (data) => {
 };
 </script>
 
-<style lang="scss" scoped>
-</style>
+<style lang="scss" scoped></style>

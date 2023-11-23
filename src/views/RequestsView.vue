@@ -4,8 +4,8 @@
     class="basis-3/4 grid gap-4 overlay h-full rounded-3xl grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-6"
   >
     <FriendCard
-      v-for="(user, index) in requests"
-      :key="index"
+      v-for="user in requests"
+      :key="user._id"
       :details="user"
       :isRequestCard="true"
     />
@@ -20,6 +20,7 @@
 
 <script setup>
 import { ref } from "vue";
+import { storeToRefs } from "pinia";
 
 import AppLoader from "@/components/common/AppLoader.vue";
 import FriendCard from "@/components/friends/FriendCard.vue";
@@ -29,8 +30,7 @@ import { useUserStore } from "@/stores/user.js";
 // config
 const isLoading = ref(false);
 const userStore = useUserStore();
-
-const requests = ref(userStore.requests);
+const { requests } = storeToRefs(userStore);
 </script>
 
 <style lang="scss" scoped></style>

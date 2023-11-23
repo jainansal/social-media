@@ -42,10 +42,14 @@
 <script setup>
 import { ref } from "vue";
 import { useRouter } from "vue-router";
+import { useToast } from "vue-toastification";
 
+import { useUserStore } from "@/stores/user";
 import userServices from "@/services/user.js";
 
 const router = useRouter();
+const toast = useToast();
+const userStore = useUserStore();
 const props = defineProps({
   isFriend: {
     type: Boolean,
@@ -74,10 +78,11 @@ const props = defineProps({
 
 const isSent = ref(props.isSentCard);
 const toggleIsSent = async () => {
-  if (!isSent.value) {
+  if (!props.isFriend && !isSent.value) {
     try {
       await userServices.sendRequest(props.details._id);
       isSent.value = true;
+      toast.success("Request sent successfully!");
     } catch (error) {
       console.log(error);
     }
@@ -91,6 +96,9 @@ const visitProfile = () => {
 const acceptRequest = async () => {
   try {
     await userServices.respondRequest(props.details._id, "accept");
+    userStore.setRequests(
+      userStore.requests.filter((user) => user._id !== props.details._id)
+    );
   } catch (error) {
     console.log(error);
   }
@@ -99,11 +107,13 @@ const acceptRequest = async () => {
 const rejectRequest = async () => {
   try {
     await userServices.respondRequest(props.details._id, "reject");
+    userStore.setRequests(
+      userStore.requests.filter((user) => user._id !== props.details._id)
+    );
   } catch (error) {
     console.log(error);
   }
 };
 </script>
 
-<style lang="scss" scoped>
-</style>
+<style lang="scss" scoped></style>
